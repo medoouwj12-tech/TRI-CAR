@@ -200,6 +200,20 @@
       "whatsappCta": "Chat on WhatsApp",
       "whatsappIntro": "Hello, I would like to inquire about First Car services.",
       "whatsappDefault": "Hello, I would like to book a luxury car with First Car.",
+      "welcome": "TRI CAR car rental welcomes you 🤝",
+      "instructions": {
+        "heading": "Please tell us the following:",
+        "carType": "1- Car type: (Sedan 🚗 - SUV 🚙)",
+        "pickup": "2- Pickup date and rental duration 🤔",
+        "nationality": "3- Nationality?! 😍"
+      },
+      "termsTitle": "Rental conditions:",
+      "terms": {
+        "one": "1- ID verification (ID card or passport) and a valid driver's license",
+        "two": "2- Renter must be at least 21 years old 🚗🚗"
+      },
+      "location": "📍6 October - Third District - Rana Mall St. Building 39",
+      "map": "https://maps.app.goo.gl/PSaEyiyc7c8fcPXW6",
       "submit": "Send via WhatsApp",
       "sent": "Opening WhatsApp…",
       "fields": {

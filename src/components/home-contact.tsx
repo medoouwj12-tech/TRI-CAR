@@ -56,6 +56,31 @@ export function HomeContact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 space-y-4"
           >
+            <div className="rounded-3xl border border-gold-400/20 bg-card/60 p-6 space-y-4">
+              <p className="text-lg font-semibold text-gold-gradient">{t('welcome')}</p>
+              <div className="space-y-3 text-foreground/75">
+                <p className="font-semibold text-foreground">{t('instructions.heading')}</p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>{t('instructions.carType')}</li>
+                  <li>{t('instructions.pickup')}</li>
+                  <li>{t('instructions.nationality')}</li>
+                </ul>
+                <p className="font-semibold text-foreground">{t('termsTitle')}</p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>{t('terms.one')}</li>
+                  <li>{t('terms.two')}</li>
+                </ul>
+                <p className="text-sm text-foreground/60">{t('location')}</p>
+                <a
+                  href={t('map')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold-200 underline"
+                >
+                  {t('map')}
+                </a>
+              </div>
+            </div>
             <ContactItem icon={Phone} label={t('info.phone')} value="+20 155 760 8942" href="tel:+201557608942" />
             <ContactItem icon={Mail} label={t('info.email')} value="info@firstcar.eg" href="mailto:info@firstcar.eg" />
             <ContactItem icon={MapPin} label={t('info.address')} value={t('info.addressValue')} />
