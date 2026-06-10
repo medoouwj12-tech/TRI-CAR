@@ -1,0 +1,113 @@
+// Prisma schema for First Car (فرست كار)
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Admin user (single-role for now; expand later for staff/agents).
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String   // bcrypt hash
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+/// A car in the fleet. Supports both with-driver and self-drive.
+model Car {
+  id           String   @id @default(cuid())
+  make         String   // e.g. "Mercedes-Benz"
+  model        String   // e.g. "S-Class"
+  year         Int
+  category     Category
+  pricePerDay  Decimal  @db.Decimal(10, 2)
+  pricePerHour Decimal? @db.Decimal(10, 2)
+  imageUrl     String
+  gallery      String[] // additional image URLs
+  withDriver   Boolean  @default(false)
+  isAvailable  Boolean  @default(true)
+  seats        Int      @default(4)
+  transmission Transmission @default(AUTOMATIC)
+  fuelType     FuelType @default(GASOLINE)
+  features     String[] // ["AC","Leather","WiFi","Sunroof"]
+  description  String?  @db.Text
+  featured     Boolean  @default(false)
+
+  bookings BookingRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([isAvailable])
+  @@unique([make, model, year])
+}
+
+enum Category {
+  SEDAN
+  SUV
+  LUXURY
+  SPORTS
+  VAN
+  ELECTRIC
+}
+
+enum Transmission {
+  AUTOMATIC
+  MANUAL
+}
+
+enum FuelType {
+  GASOLINE
+  DIESEL
+  HYBRID
+  ELECTRIC
+}
+
+/// Booking request generated from the multi-step form and
+/// delivered to WhatsApp. Persisted for the admin dashboard.
+model BookingRequest {
+  id              String        @id @default(cuid())
+  carId           String
+  car             Car           @relation(fields: [carId], references: [id], onDelete: Restrict)
+
+  name            String
+  phone           String
+  email           String?
+
+  pickupLocation  String
+  dropoffLocation String
+  date            DateTime
+  passengers      Int           @default(1)
+  notes           String?       @db.Text
+
+  status          BookingStatus @default(PENDING)
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([status])
+  @@index([date])
+  @@index([carId])
+}
+
+enum BookingStatus {
+  PENDING
+  CONTACTED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}

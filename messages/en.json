@@ -1,0 +1,218 @@
+{
+  "nav": {
+    "fleet": "Fleet",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "book": "Book Now"
+  },
+  "hero": {
+    "badge": "Luxury Car Rental • Egypt",
+    "title": "A Journey That",
+    "titleHighlight": "Matches Your Class",
+    "subtitle": "A fleet of the most prestigious cars, professional chauffeurs, and 24/7 VIP service — because your trip deserves nothing less.",
+    "search": {
+      "pickup": "Pickup location",
+      "dropoff": "Drop-off location",
+      "date": "Trip date",
+      "passengers": "Passengers",
+      "cta": "Find a car",
+      "pickupPlaceholder": "Cairo Airport",
+      "dropoffPlaceholder": "New Capital",
+      "person": "Person",
+      "people": "People"
+    },
+    "explore": "Explore",
+    "stats": {
+      "cars": "Luxury Cars",
+      "trips": "Trips / Year",
+      "rating": "Client Rating",
+      "support": "24/7 Support"
+    }
+  },
+  "fleet": {
+    "title": "The Prestige Fleet",
+    "subtitle": "Choose from the most luxurious cars in Egypt",
+    "viewAll": "View all cars",
+    "filters": {
+      "all": "All",
+      "category": "Category",
+      "withDriver": "With driver",
+      "selfDrive": "Self drive",
+      "search": "Search the fleet…",
+      "results": "results",
+      "noResults": "No matching cars"
+    },
+    "categories": {
+      "SEDAN": "Sedan",
+      "SUV": "SUV",
+      "LUXURY": "Luxury",
+      "SPORTS": "Sports",
+      "VAN": "Van",
+      "ELECTRIC": "Electric"
+    },
+    "perDay": "day",
+    "perHour": "hour",
+    "book": "Book",
+    "details": "Details",
+    "seats": "seats",
+    "featured": "Featured",
+    "transmission": {
+      "AUTOMATIC": "Automatic",
+      "MANUAL": "Manual"
+    },
+    "fuel": {
+      "GASOLINE": "Gasoline",
+      "DIESEL": "Diesel",
+      "HYBRID": "Hybrid",
+      "ELECTRIC": "Electric"
+    }
+  },
+  "details": {
+    "specs": "Specifications",
+    "features": "Features",
+    "gallery": "Gallery",
+    "description": "Description",
+    "bookNow": "Book via WhatsApp",
+    "from": "Starting from",
+    "back": "Back to fleet",
+    "notFound": "Car not available"
+  },
+  "booking": {
+    "title": "Book your trip",
+    "step": "Step",
+    "of": "of",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Send via WhatsApp",
+    "steps": {
+      "car": "Pick a car",
+      "details": "Your details",
+      "trip": "Trip details",
+      "review": "Review"
+    },
+    "fields": {
+      "name": "Full name",
+      "phone": "Phone number",
+      "email": "Email (optional)",
+      "pickup": "Pickup location",
+      "dropoff": "Drop-off location",
+      "date": "Trip date",
+      "time": "Trip time",
+      "passengers": "Passengers",
+      "notes": "Additional notes"
+    },
+    "review": {
+      "summary": "Booking summary",
+      "car": "Car",
+      "name": "Name",
+      "phone": "Phone",
+      "trip": "Trip",
+      "passengers": "Passengers"
+    },
+    "success": "Redirecting you to WhatsApp…"
+  },
+  "admin": {
+    "title": "Admin",
+    "login": "Admin login",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "logout": "Sign out",
+    "invalidCredentials": "Invalid email or password",
+    "devHint": "Dev: admin@firstcar.eg / admin123 (or set ADMIN_EMAIL + ADMIN_PASSWORD_HASH)",
+    "secureHint": "Use your admin credentials configured in environment variables",
+    "backToSite": "← Back to site",
+    "dashboard": "Dashboard",
+    "cars": "Cars",
+    "bookings": "Booking requests",
+    "addCar": "Add car",
+    "editCar": "Edit car",
+    "deleteCar": "Delete",
+    "stats": {
+      "totalCars": "Total cars",
+      "available": "Available",
+      "withDriver": "With driver",
+      "bookings": "Bookings",
+      "pending": "Pending",
+      "revenue": "Projected revenue"
+    }
+  },
+  "footer": {
+    "tagline": "A luxury driving experience, starting here.",
+    "rights": "All rights reserved",
+    "company": "Company",
+    "support": "Support",
+    "followUs": "Follow us"
+  },
+  "home": {
+    "fleet": {
+      "eyebrow": "Featured",
+      "empty": "No featured cars at the moment."
+    },
+    "services": {
+      "eyebrow": "Services",
+      "title": "Everything you need for a premium trip",
+      "subtitle": "From airport pickup to multi-day VIP tours — we handle every detail.",
+      "items": {
+        "chauffeur": {
+          "title": "Professional chauffeurs",
+          "desc": "Trained, discreet drivers for business and leisure travel across Egypt."
+        },
+        "fleet": {
+          "title": "Premium fleet",
+          "desc": "Mercedes, BMW, Range Rover and more — maintained to showroom standards."
+        },
+        "availability": {
+          "title": "24/7 availability",
+          "desc": "Book anytime. We respond fast on WhatsApp and phone."
+        },
+        "concierge": {
+          "title": "Concierge support",
+          "desc": "Custom itineraries, multi-stop routes, and special event logistics."
+        },
+        "vip": {
+          "title": "VIP experience",
+          "desc": "Complimentary water, Wi-Fi, and a spotless cabin every trip."
+        },
+        "coverage": {
+          "title": "Nationwide coverage",
+          "desc": "Cairo, Alexandria, the North Coast, Red Sea, and beyond."
+        }
+      }
+    },
+    "about": {
+      "eyebrow": "About First Car",
+      "title": "Luxury mobility, built on trust",
+      "p1": "First Car was founded to bring world-class chauffeur and self-drive services to Egypt's most discerning travelers. We combine a curated fleet with white-glove service at every touchpoint.",
+      "p2": "Whether you need an airport transfer, a wedding motorcade, or a week-long executive rental — our team delivers punctuality, discretion, and comfort without compromise.",
+      "stats": {
+        "experience": { "value": "8+", "label": "Years of experience" },
+        "clients": { "value": "8K+", "label": "Happy clients" },
+        "cities": { "value": "12", "label": "Cities covered" },
+        "quality": { "value": "100%", "label": "Inspected fleet" }
+      }
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Let's plan your next journey",
+      "subtitle": "Reach us on WhatsApp, phone, or email — we typically reply within minutes.",
+      "whatsappCta": "Chat on WhatsApp",
+      "whatsappIntro": "Hello, I would like to inquire about First Car services.",
+      "whatsappDefault": "Hello, I would like to book a luxury car with First Car.",
+      "submit": "Send via WhatsApp",
+      "sent": "Opening WhatsApp…",
+      "fields": {
+        "name": "Full name",
+        "phone": "Phone",
+        "message": "Your message"
+      },
+      "info": {
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Head office",
+        "addressValue": "New Cairo, Egypt"
+      }
+    }
+  }
+}
