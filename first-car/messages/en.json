@@ -1,0 +1,40 @@
+{
+  "nav": {
+    "fleet": "Fleet",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "book": "Book Now"
+  },
+  "hero": {
+    "badge": "Luxury Car Rental • Egypt",
+    "title": "A Journey That",
+    "titleHighlight": "Matches Your Class",
+    "subtitle": "A fleet of the most prestigious cars, professional chauffeurs, and 24/7 VIP service — because your trip deserves nothing less.",
+    "search": {
+      "pickup": "Pickup location",
+      "dropoff": "Drop-off location",
+      "date": "Trip date",
+      "passengers": "Passengers",
+      "cta": "Find a car"
+    },
+    "stats": {
+      "cars": "Luxury Cars",
+      "trips": "Trips / Year",
+      "rating": "Client Rating",
+      "support": "24/7 Support"
+    }
+  },
+  "fleet": {
+    "title": "The Prestige Fleet",
+    "subtitle": "Choose from the most luxurious cars in Egypt",
+    "viewAll": "View all cars"
+  },
+  "footer": {
+    "tagline": "A luxury driving experience, starting here.",
+    "rights": "All rights reserved",
+    "company": "Company",
+    "support": "Support",
+    "followUs": "Follow us"
+  }
+}

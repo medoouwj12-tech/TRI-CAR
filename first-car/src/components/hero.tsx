@@ -4,8 +4,7 @@ import * as React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Calendar, MapPin, Users, ArrowRight, ChevronDown, Sparkles, Star } from 'lucide-react';
-import { Link, useRouter } from '@/i18n/routing';
-import { saveSearchPrefs } from '@/lib/search-prefs';
+import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -19,8 +18,10 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const yCar = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
   const opacityFade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scaleFade = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   const stats = [
     { value: '120+', key: 'cars' as const },
@@ -35,11 +36,14 @@ export function Hero() {
       className="relative min-h-[100svh] w-full overflow-hidden bg-ink-900"
       aria-label="Hero"
     >
+      {/* Layered backgrounds */}
       <motion.div
-        style={{ y: yBg }}
+        style={{ y: yBg, scale: scaleFade }}
         className="absolute inset-0 -z-10"
       >
+        {/* Base gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900" />
+        {/* Radial gold glow */}
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-50"
           style={{
@@ -48,9 +52,11 @@ export function Hero() {
             filter: 'blur(20px)',
           }}
         />
+        {/* Subtle film grain */}
         <div className="absolute inset-0 grain" />
       </motion.div>
 
+      {/* Decorative grid lines */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-[0.07]"
@@ -66,14 +72,16 @@ export function Hero() {
       />
 
       <motion.div
-        style={{ opacity: opacityFade }}
+        style={{ y: yCar, opacity: opacityFade }}
         className="container relative pt-32 sm:pt-36 lg:pt-40 pb-10"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Copy */}
           <div className="lg:col-span-7">
             <motion.div
-              initial={false}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.1 }}
               className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-background/40 px-4 py-1.5 text-xs sm:text-sm backdrop-blur-md"
             >
               <Sparkles className="h-3.5 w-3.5 text-gold-300" />
@@ -81,8 +89,9 @@ export function Hero() {
             </motion.div>
 
             <motion.h1
-              initial={false}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease, delay: 0.2 }}
               className="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.02] tracking-tight"
             >
               <span className="block text-foreground">{t('title')}</span>
@@ -95,16 +104,18 @@ export function Hero() {
             </motion.h1>
 
             <motion.p
-              initial={false}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.45 }}
               className="mt-6 max-w-xl text-base sm:text-lg text-foreground/70 leading-relaxed"
             >
               {t('subtitle')}
             </motion.p>
 
             <motion.div
-              initial={false}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.6 }}
               className="mt-8 flex flex-wrap items-center gap-4"
             >
               <Link
@@ -113,7 +124,7 @@ export function Hero() {
                   'group inline-flex items-center gap-2 rounded-full',
                   'bg-gold-gradient text-ink-900 px-7 py-3.5 text-sm sm:text-base font-bold',
                   'shadow-gold hover:shadow-gold-lg',
-                  'transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]',
+                  'transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]',
                 )}
               >
                 {t('search.cta')}
@@ -121,15 +132,17 @@ export function Hero() {
               </Link>
               <Link
                 href="/fleet"
-                className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-gold-200 hover:bg-gold-400/5 transition-all duration-200"
+                className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
               >
                 {tFleet('viewAll')}
               </Link>
             </motion.div>
 
+            {/* Stats */}
             <motion.dl
-              initial={false}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.8 }}
               className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl"
             >
               {stats.map((s, i) => (
@@ -148,37 +161,43 @@ export function Hero() {
             </motion.dl>
           </div>
 
+          {/* Car visual */}
           <motion.div
-            initial={false}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease, delay: 0.3 }}
             className="lg:col-span-5 relative"
           >
             <CarVisual />
           </motion.div>
         </div>
 
+        {/* Search form overlay */}
         <motion.div
           id="booking"
-          initial={false}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease, delay: 0.9 }}
           className="mt-14 lg:mt-20"
         >
           <SearchForm />
         </motion.div>
       </motion.div>
 
+      {/* Scroll indicator */}
       <motion.button
         type="button"
         onClick={() => {
           const el = document.getElementById('fleet-section');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
-        initial={false}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-gold-300/80 hover:text-gold-200 transition-colors duration-200"
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-gold-300/80 hover:text-gold-200"
         aria-label="Scroll to fleet"
       >
-        <span className="text-[10px] uppercase tracking-[0.4em]">{t('explore')}</span>
+        <span className="text-[10px] uppercase tracking-[0.4em]">Explore</span>
         <motion.span
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
@@ -192,29 +211,9 @@ export function Hero() {
 
 function SearchForm() {
   const t = useTranslations('hero.search');
-  const router = useRouter();
-  const [pickup, setPickup] = React.useState('');
-  const [dropoff, setDropoff] = React.useState('');
-  const [date, setDate] = React.useState('');
-  const [passengers, setPassengers] = React.useState(2);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    saveSearchPrefs({
-      pickupLocation: pickup.trim() || undefined,
-      dropoffLocation: dropoff.trim() || undefined,
-      date: date || undefined,
-      passengers,
-    });
-    const params = new URLSearchParams();
-    if (passengers > 1) params.set('passengers', String(passengers));
-    const qs = params.toString();
-    router.push(qs ? `/fleet?${qs}` : '/fleet');
-  };
-
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={(e) => e.preventDefault()}
       className={cn(
         'group relative overflow-hidden rounded-3xl',
         'border border-gold-400/25 shadow-gold',
@@ -226,38 +225,31 @@ function SearchForm() {
         <Field icon={MapPin} label={t('pickup')}>
           <input
             type="text"
-            value={pickup}
-            onChange={(e) => setPickup(e.target.value)}
-            placeholder={t('pickupPlaceholder')}
+            placeholder="Cairo Airport"
             className="w-full bg-transparent text-sm text-foreground placeholder:text-foreground/40 focus:outline-none"
           />
         </Field>
         <Field icon={MapPin} label={t('dropoff')}>
           <input
             type="text"
-            value={dropoff}
-            onChange={(e) => setDropoff(e.target.value)}
-            placeholder={t('dropoffPlaceholder')}
+            placeholder="New Capital"
             className="w-full bg-transparent text-sm text-foreground placeholder:text-foreground/40 focus:outline-none"
           />
         </Field>
         <Field icon={Calendar} label={t('date')}>
           <input
             type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
             className="w-full bg-transparent text-sm text-foreground/90 focus:outline-none [color-scheme:dark]"
           />
         </Field>
         <Field icon={Users} label={t('passengers')}>
           <select
-            value={passengers}
-            onChange={(e) => setPassengers(Number(e.target.value))}
+            defaultValue="2"
             className="w-full bg-transparent text-sm text-foreground focus:outline-none appearance-none cursor-pointer"
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
               <option key={n} value={n} className="bg-ink-900 text-foreground">
-                {n} {n === 1 ? t('person') : t('people')}
+                {n} {n === 1 ? 'Person' : 'People'}
               </option>
             ))}
           </select>

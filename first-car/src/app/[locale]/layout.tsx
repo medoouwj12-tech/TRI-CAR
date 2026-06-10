@@ -9,21 +9,18 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
-  preload: true,
 });
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   variable: '--font-cairo',
   display: 'swap',
-  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -70,10 +67,17 @@ export default async function LocaleLayout({
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
   return (
-    <div dir={dir} className={locale === 'ar' ? 'font-arabic' : 'font-sans'}>
-      <Providers locale={locale} messages={messages}>
-        {children}
-      </Providers>
-    </div>
+    <html
+      lang={locale}
+      dir={dir}
+      className={`${inter.variable} ${playfair.variable} ${cairo.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={locale === 'ar' ? 'font-arabic' : 'font-sans'}>
+        <Providers locale={locale} messages={messages}>
+          {children}
+        </Providers>
+      </body>
+    </html>
   );
 }

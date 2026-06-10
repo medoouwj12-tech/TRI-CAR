@@ -10,7 +10,15 @@ import { formatCurrency } from '@/lib/utils';
 import type { Car } from '@/lib/cars.types';
 import { cn } from '@/lib/utils';
 
-export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
+const Spec = React.memo(({ icon: Icon, label }: { icon: React.ComponentType<{ className?: string }>; label: string }) => (
+  <div className="flex flex-col items-center gap-1 rounded-xl border border-gold-400/10 bg-background/30 py-2.5">
+    <Icon className="h-3.5 w-3.5 text-gold-300" />
+    <span className="text-[10px] text-foreground/70 font-medium text-center leading-tight">{label}</span>
+  </div>
+));
+Spec.displayName = 'Spec';
+
+export const CarCard = React.memo(function CarCard({ car }: { car: Car }) {
   const t = useTranslations('fleet');
   const tDetails = useTranslations('details');
   const locale = useLocale();
@@ -18,19 +26,18 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 30 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.4 }}
       whileHover="hover"
       className={cn(
         'group relative overflow-hidden rounded-3xl',
         'border border-gold-400/15 hover:border-gold-400/40',
-        'bg-card transition-all duration-500',
+        'bg-card transition-all duration-300',
         'hover:shadow-gold-lg hover:-translate-y-1',
       )}
     >
-      {/* Featured badge */}
       {car.featured && (
         <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full bg-gold-gradient px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-ink-900 shadow-gold">
           <Sparkles className="h-3 w-3" />
@@ -38,7 +45,6 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
         </div>
       )}
 
-      {/* With driver tag */}
       {car.withDriver && (
         <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 rounded-full glass-light dark:glass border border-gold-400/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-200">
           <Star className="h-3 w-3 text-gold-300 fill-gold-300" />
@@ -46,11 +52,10 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
         </div>
       )}
 
-      {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden bg-ink-700">
         <motion.div
-          variants={{ hover: { scale: 1.08 } }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          variants={{ hover: { scale: 1.05 } }}
+          transition={{ duration: 0.4 }}
           className="absolute inset-0"
         >
           <Image
@@ -59,19 +64,17 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
+            loading="lazy"
           />
         </motion.div>
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/30 to-transparent opacity-90" />
-        {/* Hover gold glow */}
         <motion.div
           variants={{ hover: { opacity: 1 } }}
           initial={{ opacity: 0 }}
-          className="absolute inset-0 bg-gradient-to-tr from-gold-400/0 via-gold-400/0 to-gold-400/15 transition-opacity duration-700"
+          className="absolute inset-0 bg-gradient-to-tr from-gold-400/0 via-gold-400/0 to-gold-400/15 transition-opacity duration-500"
         />
       </div>
 
-      {/* Content */}
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-2 mb-3">
           <div>
@@ -85,14 +88,12 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
           </div>
         </div>
 
-        {/* Specs */}
         <div className="grid grid-cols-3 gap-2 my-4">
           <Spec icon={Users} label={`${car.seats} ${t('seats')}`} />
           <Spec icon={Settings2} label={t(`transmission.${car.transmission}`)} />
           <Spec icon={Fuel} label={t(`fuel.${car.fuelType}`)} />
         </div>
 
-        {/* Price + CTA */}
         <div className="flex items-end justify-between gap-3 pt-4 border-t border-gold-400/10">
           <div>
             <p className="text-[10px] uppercase tracking-widest text-foreground/50">
@@ -113,15 +114,6 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
       </div>
     </motion.article>
   );
-}
-
-function Spec({ icon: Icon, label }: { icon: React.ComponentType<{ className?: string }>; label: string }) {
-  return (
-    <div className="flex flex-col items-center gap-1 rounded-xl border border-gold-400/10 bg-background/30 py-2.5">
-      <Icon className="h-3.5 w-3.5 text-gold-300" />
-      <span className="text-[10px] text-foreground/70 font-medium text-center leading-tight">{label}</span>
-    </div>
-  );
-}
+});
 
 export default CarCard;
