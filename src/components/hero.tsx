@@ -80,33 +80,38 @@ export function Hero() {
               <span className="text-gold-100/90">{t('badge')}</span>
             </motion.div>
 
-            <motion.h1
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.02] tracking-tight"
-            >
-              <span className="block text-foreground">{t('title')}</span>
-              <span
-                className="block mt-2 text-gold-gradient"
-                style={{ filter: 'drop-shadow(0 0 30px rgba(212,175,55,0.25))' }}
-              >
-                {t('titleHighlight')}
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-6 max-w-xl text-base sm:text-lg text-foreground/70 leading-relaxed"
-            >
-              {t('subtitle')}
-            </motion.p>
-
             <motion.div
               initial={false}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-8 flex flex-wrap items-center gap-4"
+              className="mt-6 rounded-[2rem] border border-gold-400/20 bg-[#3d2918]/90 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl"
             >
+              <motion.h1
+                initial={false}
+                animate={{ opacity: 1, y: 0 }}
+                className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.02] tracking-tight"
+              >
+                <span className="block text-foreground">{t('title')}</span>
+                <span
+                  className="block mt-2 text-gold-gradient"
+                  style={{ filter: 'drop-shadow(0 0 30px rgba(212,175,55,0.25))' }}
+                >
+                  {t('titleHighlight')}
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={false}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-6 max-w-xl text-base sm:text-lg text-foreground/70 leading-relaxed"
+              >
+                {t('subtitle')}
+              </motion.p>
+
+              <motion.div
+                initial={false}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-8 flex flex-wrap items-center gap-4"
+              >
               <Link
                 href="/#booking"
                 className={cn(
@@ -126,7 +131,8 @@ export function Hero() {
                 {tFleet('viewAll')}
               </Link>
             </motion.div>
-
+           </motion.div>
+ 
             <motion.dl
               initial={false}
               animate={{ opacity: 1, y: 0 }}
