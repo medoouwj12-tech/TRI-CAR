@@ -39,7 +39,11 @@ export function Hero() {
         style={{ y: yBg }}
         className="absolute inset-0 -z-10"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900" />
+        <div
+          className="absolute inset-0 -z-20 bg-cover bg-right opacity-80"
+          style={{ backgroundImage: "url('/images/hero-arabic-bg.svg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-900/80 via-ink-800/65 to-ink-900/90" />
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-50"
           style={{
