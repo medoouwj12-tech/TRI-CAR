@@ -40,10 +40,10 @@ export function Hero() {
         className="absolute inset-0 -z-10"
       >
         <div
-          className="absolute inset-0 -z-20 bg-cover bg-right opacity-80"
-          style={{ backgroundImage: "url('/images/hero-arabic-bg.svg')" }}
+          className="absolute inset-0 -z-20 bg-cover bg-right opacity-90"
+          style={{ backgroundImage: "url('/images/hero-car-bg.png')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-900/80 via-ink-800/65 to-ink-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-ink-950/90 via-ink-900/70 to-ink-950/95" />
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-50"
           style={{
