@@ -214,6 +214,8 @@
       },
       "location": "📍6 October - Third District - Rana Mall St. Building 39",
       "map": "https://maps.app.goo.gl/PSaEyiyc7c8fcPXW6",
+      "mapMessage": "You can view our location on the map below:",
+      "openInMaps": "Open in Google Maps",
       "submit": "Send via WhatsApp",
       "sent": "Opening WhatsApp…",
       "fields": {

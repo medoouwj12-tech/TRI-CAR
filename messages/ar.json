@@ -214,6 +214,8 @@
       },
       "location": "📍6 اكتوبر-الحي الثالث-ش رنا مول-ع 39",
       "map": "https://maps.app.goo.gl/PSaEyiyc7c8fcPXW6",
+      "mapMessage": "يمكنك رؤية موقعنا على الخريطة أدناه:",
+      "openInMaps": "افتح في خرائط جوجل",
       "submit": "إرسال عبر واتساب",
       "sent": "جاري فتح واتساب…",
       "fields": {

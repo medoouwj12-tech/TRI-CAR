@@ -130,6 +130,28 @@ export function HomeContact() {
             )}
           </motion.form>
         </div>
+        <div className="mt-12 rounded-3xl overflow-hidden border border-gold-400/20 shadow-gold/10">
+          <iframe
+            title="TRI CAR Location"
+            src="https://maps.google.com/maps?q=6%20October%20Third%20District%20Rana%20Mall%20St%20Bldg%2039&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            className="h-80 w-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+          <div className="bg-background/90 px-6 py-5 text-foreground/70">
+            <p className="text-sm sm:text-base">
+              {t('mapMessage')}{' '}
+              <a
+                href={t('map')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold-200 underline"
+              >
+                {t('openInMaps')}
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
