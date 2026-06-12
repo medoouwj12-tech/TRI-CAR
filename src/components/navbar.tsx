@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Menu, X, Phone } from 'lucide-react';
 import { Logo } from './logo';
@@ -14,19 +14,9 @@ const navItems = [
   { key: 'fleet', href: '/fleet' },
   { key: 'services', href: '/#services' },
   { key: 'about', href: '/#about' },
+  { key: 'policy', href: '/#policy' },
   { key: 'contact', href: '/#contact' },
 ] as const;
-
-const NavLink = React.memo(({ item, t }: { item: typeof navItems[number], t: any }) => (
-  <Link
-    href={item.href}
-    className="group relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors duration-200"
-  >
-    {t(item.key)}
-    <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold-gradient group-hover:w-full transition-all duration-300" />
-  </Link>
-));
-NavLink.displayName = 'NavLink';
 
 export function Navbar() {
   const t = useTranslations('nav');
@@ -39,10 +29,12 @@ export function Navbar() {
     setScrolled(latest > 24);
   });
 
+  // Close mobile menu on route change
   React.useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu open
   React.useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -57,10 +49,11 @@ export function Navbar() {
   return (
     <>
       <motion.header
-        initial={false}
+        initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+          'fixed inset-x-0 top-0 z-50 transition-all duration-500',
           scrolled
             ? 'py-2 backdrop-blur-xl'
             : 'py-4 backdrop-blur-md',
@@ -69,7 +62,7 @@ export function Navbar() {
         <div
           className={cn(
             'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8',
-            'rounded-2xl transition-all duration-300',
+            'rounded-2xl transition-all duration-500',
             scrolled
               ? 'glass-light dark:glass border border-gold-400/20 shadow-gold-sm'
               : 'border border-transparent',
@@ -83,10 +76,17 @@ export function Navbar() {
               <Logo size={40} />
             </Link>
 
+            {/* Desktop nav */}
             <ul className="hidden lg:flex items-center gap-8">
               {navItems.map((item) => (
                 <li key={item.key}>
-                  <NavLink item={item} t={t} />
+                  <Link
+                    href={item.href}
+                    className="group relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {t(item.key)}
+                    <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold-gradient group-hover:w-full transition-all duration-500" />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -100,7 +100,7 @@ export function Navbar() {
                   'hidden sm:inline-flex items-center gap-2 rounded-full',
                   'bg-gold-gradient text-ink-900 px-5 py-2.5 text-sm font-bold',
                   'shadow-gold hover:shadow-gold-lg',
-                  'transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]',
+                  'transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]',
                 )}
               >
                 {t('book')}
@@ -123,6 +123,7 @@ export function Navbar() {
         </div>
       </motion.header>
 
+      {/* Mobile menu */}
       <motion.div
         initial={false}
         animate={{
@@ -130,21 +131,21 @@ export function Navbar() {
             ? 'inset(0% 0% 0% 0%)'
             : 'inset(0% 0% 100% 0%)',
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="lg:hidden fixed inset-0 z-40 bg-ink-900/98 dark:bg-ink-900/98 backdrop-blur-2xl"
       >
         <div className="flex h-full flex-col items-center justify-center gap-8 px-6">
           <ul className="flex flex-col items-center gap-6">
-            {navItems.map((item) => (
+            {navItems.map((item, i) => (
               <motion.li
                 key={item.key}
-                initial={false}
+                initial={{ opacity: 0, y: 20 }}
                 animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.2 }}
+                transition={{ delay: 0.1 + i * 0.06 }}
               >
                 <Link
                   href={item.href}
-                  className="text-3xl font-extrabold tracking-tight text-foreground hover:text-gold-300 transition-colors duration-200"
+                  className="text-3xl font-extrabold tracking-tight text-foreground hover:text-gold-300 transition-colors"
                 >
                   {t(item.key)}
                 </Link>
@@ -152,9 +153,9 @@ export function Navbar() {
             ))}
           </ul>
           <motion.div
-            initial={false}
+            initial={{ opacity: 0, y: 20 }}
             animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.4 }}
             className="flex flex-col items-center gap-3 w-full max-w-xs"
           >
             <Link

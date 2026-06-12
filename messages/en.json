@@ -3,6 +3,7 @@
     "fleet": "Fleet",
     "services": "Services",
     "about": "About",
+    "policy": "Policy",
     "contact": "Contact",
     "book": "Book Now"
   },
@@ -200,22 +201,6 @@
       "whatsappCta": "Chat on WhatsApp",
       "whatsappIntro": "Hello, I would like to inquire about First Car services.",
       "whatsappDefault": "Hello, I would like to book a luxury car with First Car.",
-      "welcome": "TRI CAR car rental welcomes you 🤝",
-      "instructions": {
-        "heading": "Please tell us the following:",
-        "carType": "1- Car type: (Sedan 🚗 - SUV 🚙)",
-        "pickup": "2- Pickup date and rental duration 🤔",
-        "nationality": "3- Nationality?! 😍"
-      },
-      "termsTitle": "Rental conditions:",
-      "terms": {
-        "one": "1- ID verification (ID card or passport) and a valid driver's license",
-        "two": "2- Renter must be at least 21 years old 🚗🚗"
-      },
-      "location": "📍6 October - Third District - Rana Mall St. Building 39",
-      "map": "https://maps.app.goo.gl/PSaEyiyc7c8fcPXW6",
-      "mapMessage": "You can view our location on the map below:",
-      "openInMaps": "Open in Google Maps",
       "submit": "Send via WhatsApp",
       "sent": "Opening WhatsApp…",
       "fields": {
@@ -229,6 +214,52 @@
         "address": "Head office",
         "addressValue": "New Cairo, Egypt"
       }
+    },
+    "policy": {
+      "eyebrow": "Al-Hossam Car Rental",
+      "title": "Car Rental Contract Terms & Policy",
+      "intro": "Please review our contract terms and rental policy before signing to ensure a smooth and transparent experience.",
+      "sections": {
+        "docs": {
+          "title": "Required Documents",
+          "items": {
+            "1": "Valid National ID / Original passport for non-residents.",
+            "2": "Valid driving license (local or international).",
+            "3": "Recent utility bill, notarized lease, or ownership deed (copy) as proof of residence.",
+            "4": "We do not serve renters under the legal age ( 21 years )."
+          }
+        },
+        "handover": {
+          "title": "Vehicle Handover Steps",
+          "items": {
+            "1": "Inspect the contracted vehicle, receive its keys and registration, and confirm the spare tire, jack, wheel spanner, and fire extinguisher are all in good condition.",
+            "2": "A walk-around video is recorded at handover, and water & oil levels are checked.",
+            "3": "A test drive is performed by the customer."
+          }
+        },
+        "timeDistance": {
+          "title": "Time & Distance Policy",
+          "items": {
+            "1": "Day 1 ends at 12:00 AM (midnight) regardless of pickup time. Day 2 starts at 12:00 AM and ends at 12:00 AM the next day, and so on.",
+            "2": "The renter is allowed 100 km per day. Any extra kilometer is charged at 6 EGP / 8 EGP / 10 EGP depending on the car's type and model."
+          }
+        },
+        "deposit": {
+          "title": "Security Deposit",
+          "items": {
+            "1": "A refundable deposit of 5,000 EGP is collected at contract signing (plus the original passport for non-residents). It is refunded at the end of the rental period, provided the car is returned in the same condition as received (fuel, exterior, interior, and cleaned)."
+          }
+        },
+        "violations": {
+          "title": "Traffic Violations",
+          "items": {
+            "1": "The renter signs a declaration accepting full responsibility for any traffic violations during the rental period and agrees to settle them upon request."
+          }
+        }
+      },
+      "signature": "With the regards of Al-Hossam Car Rental family",
+      "manager": "Eng. / Hossam El-Shamy",
+      "phone": "01123311000"
     }
   }
 }

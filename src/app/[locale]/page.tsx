@@ -5,6 +5,7 @@ import { Hero } from '@/components/hero';
 import { FleetTeaser } from '@/components/fleet-teaser';
 import { HomeServices } from '@/components/home-services';
 import { HomeAbout } from '@/components/home-about';
+import { HomePolicy } from '@/components/home-policy';
 import { HomeContact } from '@/components/home-contact';
 
 export default async function HomePage({
@@ -24,6 +25,7 @@ export default async function HomePage({
         <FleetTeaser locale={locale} />
         <HomeServices />
         <HomeAbout />
+        <HomePolicy />
         <HomeContact />
       </main>
       <Footer />
