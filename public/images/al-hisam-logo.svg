@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f1d989;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#aa8c2a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="60" r="48" fill="#1a1a1a" stroke="url(#goldGrad)" stroke-width="2"/>
+  
+  <!-- Car silhouette icon -->
+  <g transform="translate(50, 60)">
+    <!-- Car body -->
+    <path d="M -20 0 L -15 -8 Q -10 -12 0 -12 Q 10 -12 15 -8 L 20 0 Z" 
+          fill="url(#goldGrad)" filter="url(#shadow)"/>
+    <!-- Car bottom -->
+    <path d="M -20 0 L -18 8 Q -15 10 15 10 Q 18 10 20 8 L 20 0 Z" 
+          fill="#d4af37"/>
+    <!-- Window -->
+    <path d="M -8 -6 Q -6 -10 6 -10 L 8 -2 Z" 
+          fill="#2c2c2c" opacity="0.8"/>
+    <!-- Wheels -->
+    <circle cx="-10" cy="8" r="3.5" fill="#1a1a1a" stroke="url(#goldGrad)" stroke-width="1.5"/>
+    <circle cx="10" cy="8" r="3.5" fill="#1a1a1a" stroke="url(#goldGrad)" stroke-width="1.5"/>
+    <!-- Headlight -->
+    <circle cx="-18" cy="-2" r="1.5" fill="url(#goldGrad)"/>
+    <!-- Accent line -->
+    <line x1="-18" y1="2" x2="18" y2="2" stroke="url(#goldGrad)" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  <!-- Logo Text -->
+  <g direction="rtl">
+    <!-- Main Arabic text "الحسام" -->
+    <text x="110" y="45" 
+          font-family="Arial, sans-serif" 
+          font-size="28" 
+          font-weight="bold" 
+          fill="#f1d989"
+          text-anchor="start"
+          letter-spacing="2">الحسام</text>
+    
+    <!-- Subtext "لايجار السيارات" -->
+    <text x="110" y="68" 
+          font-family="Arial, sans-serif" 
+          font-size="14" 
+          fill="#d4af37"
+          text-anchor="start"
+          letter-spacing="1">لايجار السيارات</text>
+    
+    <!-- English accent "CAR RENTAL" -->
+    <text x="110" y="88" 
+          font-family="Arial, sans-serif" 
+          font-size="10" 
+          fill="#aa8c2a"
+          text-anchor="start"
+          font-weight="600"
+          letter-spacing="1.5">CAR RENTAL</text>
+  </g>
+  
+  <!-- Decorative line -->
+  <line x1="95" y1="35" x2="95" y2="90" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.6"/>
+</svg>

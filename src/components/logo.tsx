@@ -8,21 +8,21 @@ type LogoProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 };
 
 /**
- * TRI CAR — Logo with car image and brand name.
- * Displays the TRI CAR logo with the brand name text.
+ * Al-Hisam Car Rental — Logo with car icon and brand name in Arabic.
+ * Displays the Al-Hisam logo with the brand name text.
  */
 export function Logo({ size = 44, showSubtext = true, className, ...props }: LogoProps) {
   return (
     <div
-      className={cn('inline-flex items-center gap-3 select-none', className)}
-      aria-label="TRI CAR"
+      className={cn('inline-flex items-center gap-2 select-none', className)}
+      aria-label="الحسام لايجار السيارات"
       role="img"
     >
       {/* Logo Image */}
-      <div style={{ width: size, height: size, position: 'relative', flexShrink: 0 }}>
+      <div style={{ width: size + 20, height: size, position: 'relative', flexShrink: 0 }}>
         <Image
-          src="/images/tri-car-logo.png"
-          alt="TRI CAR Logo"
+          src="/images/al-hisam-logo.svg"
+          alt="الحسام"
           fill
           className="object-contain"
           priority
@@ -32,16 +32,25 @@ export function Logo({ size = 44, showSubtext = true, className, ...props }: Log
       {showSubtext && (
         <div className="flex flex-col leading-none">
           <span
-            className="text-[1.45rem] sm:text-[1.6rem] font-extrabold tracking-tight"
+            className="text-[1.2rem] sm:text-[1.35rem] font-extrabold tracking-tight"
             style={{
               background: 'linear-gradient(135deg, #F1D989 0%, #D4AF37 50%, #B8941F 100%)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
-              textShadow: '0 0 20px rgba(212,175,55,0.15)',
             }}
+            dir="rtl"
           >
-            TRI CAR
+            الحسام
+          </span>
+          <span
+            className="text-[0.7rem] sm:text-[0.75rem] font-semibold tracking-wider"
+            style={{
+              color: '#d4af37',
+            }}
+            dir="rtl"
+          >
+            تأجير السيارات
           </span>
         </div>
       )}
