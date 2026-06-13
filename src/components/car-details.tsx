@@ -18,7 +18,7 @@ export function CarDetails({ car }: { car: Car }) {
   const [activeImg, setActiveImg] = React.useState(0);
 
   const gallery = car.gallery.length > 0 ? car.gallery : [car.imageUrl];
-  const waMsg = `مرحباً، أرغب في حجز سيارة من فرست كار.\nالاسم: [الاسم]\nالعربية: ${car.make} ${car.model}\nعدد الركاب: ${car.seats}\nمن: [الاستلام]\nإلى: [الوصول]\nالتاريخ: [التاريخ]`;
+  const waMsg = `مرحباً، أرغب في حجز سيارة من الحسام للسيارات.\nالاسم: [الاسم]\nالعربية: ${car.make} ${car.model}\nعدد الركاب: ${car.seats}\nمن: [الاستلام]\nإلى: [الوصول]\nالتاريخ: [التاريخ]`;
   const waHref = buildWhatsAppUrl(waMsg);
 
   return (

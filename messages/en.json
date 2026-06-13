@@ -183,9 +183,9 @@
       }
     },
     "about": {
-      "eyebrow": "About First Car",
+      "eyebrow": "About Al-Hossam Cars",
       "title": "Luxury mobility, built on trust",
-      "p1": "First Car was founded to bring world-class chauffeur and self-drive services to Egypt's most discerning travelers. We combine a curated fleet with white-glove service at every touchpoint.",
+      "p1": "Al-Hossam Cars was founded to bring world-class chauffeur and self-drive services to Egypt's most discerning travelers. We combine a curated fleet with white-glove service at every touchpoint.",
       "p2": "Whether you need an airport transfer, a wedding motorcade, or a week-long executive rental — our team delivers punctuality, discretion, and comfort without compromise.",
       "stats": {
         "experience": { "value": "8+", "label": "Years of experience" },
@@ -199,8 +199,8 @@
       "title": "Let's plan your next journey",
       "subtitle": "Reach us on WhatsApp, phone, or email — we typically reply within minutes.",
       "whatsappCta": "Chat on WhatsApp",
-      "whatsappIntro": "Hello, I would like to inquire about First Car services.",
-      "whatsappDefault": "Hello, I would like to book a luxury car with First Car.",
+      "whatsappIntro": "Hello, I would like to inquire about Al-Hossam Cars services.",
+      "whatsappDefault": "Hello, I would like to book a luxury car with Al-Hossam Cars.",
       "submit": "Send via WhatsApp",
       "sent": "Opening WhatsApp…",
       "fields": {
@@ -226,7 +226,7 @@
             "1": "Valid National ID / Original passport for non-residents.",
             "2": "Valid driving license (local or international).",
             "3": "Recent utility bill, notarized lease, or ownership deed (copy) as proof of residence.",
-            "4": "We do not serve renters under the legal age ( 21 years )."
+            "4": "We do not serve renters under the legal age ( 26 years )."
           }
         },
         "handover": {

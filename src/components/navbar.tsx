@@ -165,11 +165,11 @@ export function Navbar() {
               {t('book')}
             </Link>
             <a
-              href="tel:+201557608942"
+              href="tel:+201123311000"
               className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-base font-semibold text-gold-200"
             >
               <Phone className="h-4 w-4" />
-              +20 155 760 8942
+              +20 112 331 1000
             </a>
           </motion.div>
         </div>

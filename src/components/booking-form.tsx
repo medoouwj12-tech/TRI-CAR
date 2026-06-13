@@ -73,7 +73,7 @@ export function BookingForm({ car }: { car: Car }) {
 
     // Build WhatsApp message in the exact requested format
     const message =
-      `مرحباً، أرغب في حجز سيارة من فرست كار.\n` +
+      `مرحباً، أرغب في حجز سيارة من الحسام للسيارات.\n` +
       `الاسم: ${data.name}\n` +
       `العربية: ${car.make} ${car.model}\n` +
       `عدد الركاب: ${data.passengers}\n` +

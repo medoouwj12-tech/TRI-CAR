@@ -9,37 +9,34 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
-  preload: true,
 });
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   variable: '--font-cairo',
   display: 'swap',
-  preload: true,
 });
 
 export const metadata: Metadata = {
-  title: 'فرست كار | First Car — Luxury Car Rental Egypt',
+  title: 'الحسام للسيارات | Al-Hossam Cars — Luxury Car Rental Egypt',
   description:
-    'First Car - فرست كار. Luxury car rental & VIP trip booking across Egypt. Premium fleet, professional chauffeurs, 24/7 concierge.',
-  metadataBase: new URL('https://firstcar.eg'),
+    'Al-Hossam Cars - الحسام للسيارات. Luxury car rental & VIP trip booking across Egypt. Premium fleet, professional chauffeurs, 24/7 concierge.',
+  metadataBase: new URL('https://alhossam-cars.eg'),
   keywords: [
     'luxury car rental Egypt',
     'تأجير سيارات فاخرة',
-    'First Car',
-    'فرست كار',
+    'Al-Hossam Cars',
+    'الحسام للسيارات',
     'VIP chauffeur Cairo',
   ],
   openGraph: {
-    title: 'فرست كار | First Car — Luxury Car Rental Egypt',
+    title: 'الحسام للسيارات | Al-Hossam Cars — Luxury Car Rental Egypt',
     description:
       'A journey that matches your class. Premium fleet, VIP service, across Egypt.',
     type: 'website',
@@ -70,10 +67,17 @@ export default async function LocaleLayout({
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
   return (
-    <div dir={dir} className={locale === 'ar' ? 'font-arabic' : 'font-sans'}>
-      <Providers locale={locale} messages={messages}>
-        {children}
-      </Providers>
-    </div>
+    <html
+      lang={locale}
+      dir={dir}
+      className={`${inter.variable} ${playfair.variable} ${cairo.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={locale === 'ar' ? 'font-arabic' : 'font-sans'}>
+        <Providers locale={locale} messages={messages}>
+          {children}
+        </Providers>
+      </body>
+    </html>
   );
 }

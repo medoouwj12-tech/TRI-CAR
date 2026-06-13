@@ -57,11 +57,11 @@ export function Footer() {
               {t('tagline')}
             </p>
             <div className="mt-6 flex flex-col gap-2.5 text-sm">
-              <a href="tel:+201557608942" className="flex items-center gap-2 hover:text-gold-300 transition-colors">
-                <Phone className="h-4 w-4 text-gold-400" /> +20 155 760 8942
+              <a href="tel:+201123311000" className="flex items-center gap-2 hover:text-gold-300 transition-colors">
+                <Phone className="h-4 w-4 text-gold-400" /> +20 112 331 1000
               </a>
-              <a href="mailto:booking@firstcar.eg" className="flex items-center gap-2 hover:text-gold-300 transition-colors">
-                <Mail className="h-4 w-4 text-gold-400" /> booking@firstcar.eg
+              <a href="mailto:booking@alhossam-cars.eg" className="flex items-center gap-2 hover:text-gold-300 transition-colors">
+                <Mail className="h-4 w-4 text-gold-400" /> booking@alhossam-cars.eg
               </a>
               <span className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-gold-400" /> Cairo, Egypt
@@ -110,7 +110,7 @@ export function Footer() {
         </motion.div>
 
         <div className="mt-14 pt-6 border-t border-gold-400/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-foreground/50">
-          <p>© {year} فرست كار — First Car. {t('rights')}.</p>
+          <p>© {year} الحسام للسيارات — Al-Hossam Cars. {t('rights')}.</p>
           <p className="tracking-widest uppercase">Crafted for excellence</p>
         </div>
       </div>

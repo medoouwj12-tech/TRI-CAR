@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'فرست كار | First Car',
+  title: 'الحسام للسيارات | Al-Hossam Cars',
   description: 'Luxury Car Rental Egypt',
 };
 
@@ -10,9 +10,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
-    </html>
-  );
+  return children;
 }

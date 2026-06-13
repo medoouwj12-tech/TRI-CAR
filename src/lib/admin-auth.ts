@@ -20,7 +20,7 @@ async function verifyEnvCredentials(
   normalizedEmail: string,
   password: string,
 ): Promise<boolean> {
-  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@firstcar.eg').toLowerCase();
+  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@alhossam-cars.eg').toLowerCase();
   if (normalizedEmail !== adminEmail) return false;
 
   if (process.env.ADMIN_PASSWORD_HASH) {

@@ -56,33 +56,8 @@ export function HomeContact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 space-y-4"
           >
-            <div className="rounded-3xl border border-gold-400/20 bg-card/60 p-6 space-y-4">
-              <p className="text-lg font-semibold text-gold-gradient">{t('welcome')}</p>
-              <div className="space-y-3 text-foreground/75">
-                <p className="font-semibold text-foreground">{t('instructions.heading')}</p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>{t('instructions.carType')}</li>
-                  <li>{t('instructions.pickup')}</li>
-                  <li>{t('instructions.nationality')}</li>
-                </ul>
-                <p className="font-semibold text-foreground">{t('termsTitle')}</p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>{t('terms.one')}</li>
-                  <li>{t('terms.two')}</li>
-                </ul>
-                <p className="text-sm text-foreground/60">{t('location')}</p>
-                <a
-                  href={t('map')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gold-200 underline"
-                >
-                  {t('map')}
-                </a>
-              </div>
-            </div>
-            <ContactItem icon={Phone} label={t('info.phone')} value="+20 155 760 8942" href="tel:+201557608942" />
-            <ContactItem icon={Mail} label={t('info.email')} value="info@firstcar.eg" href="mailto:info@firstcar.eg" />
+            <ContactItem icon={Phone} label={t('info.phone')} value="+20 112 331 1000" href="tel:+201123311000" />
+            <ContactItem icon={Mail} label={t('info.email')} value="info@alhossam-cars.eg" href="mailto:info@alhossam-cars.eg" />
             <ContactItem icon={MapPin} label={t('info.address')} value={t('info.addressValue')} />
             <a
               href={buildWhatsAppUrl(t('whatsappDefault'))}
@@ -129,28 +104,6 @@ export function HomeContact() {
               <p className="text-xs text-gold-300 text-center">{t('sent')}</p>
             )}
           </motion.form>
-        </div>
-        <div className="mt-12 rounded-3xl overflow-hidden border border-gold-400/20 shadow-gold/10">
-          <iframe
-            title="TRI CAR Location"
-            src="https://maps.google.com/maps?q=6%20October%20Third%20District%20Rana%20Mall%20St%20Bldg%2039&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            className="h-80 w-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-          <div className="bg-background/90 px-6 py-5 text-foreground/70">
-            <p className="text-sm sm:text-base">
-              {t('mapMessage')}{' '}
-              <a
-                href={t('map')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gold-200 underline"
-              >
-                {t('openInMaps')}
-              </a>
-            </p>
-          </div>
         </div>
       </div>
     </section>
