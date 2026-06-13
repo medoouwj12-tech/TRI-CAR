@@ -19,8 +19,10 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const yCar = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
   const opacityFade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scaleFade = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   const stats = [
     { value: '120+', key: 'cars' as const },
@@ -35,15 +37,14 @@ export function Hero() {
       className="relative min-h-[100svh] w-full overflow-hidden bg-ink-900"
       aria-label="Hero"
     >
+      {/* Layered backgrounds */}
       <motion.div
-        style={{ y: yBg }}
+        style={{ y: yBg, scale: scaleFade }}
         className="absolute inset-0 -z-10"
       >
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-right opacity-90"
-          style={{ backgroundImage: "url('/images/hero-car-bg.png')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-ink-950/90 via-ink-900/70 to-ink-950/95" />
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900" />
+        {/* Radial gold glow */}
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-50"
           style={{
@@ -52,9 +53,11 @@ export function Hero() {
             filter: 'blur(20px)',
           }}
         />
+        {/* Subtle film grain */}
         <div className="absolute inset-0 grain" />
       </motion.div>
 
+      {/* Decorative grid lines */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-[0.07]"
@@ -70,59 +73,59 @@ export function Hero() {
       />
 
       <motion.div
-        style={{ opacity: opacityFade }}
+        style={{ y: yCar, opacity: opacityFade }}
         className="container relative pt-32 sm:pt-36 lg:pt-40 pb-10"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Copy */}
           <div className="lg:col-span-7">
             <motion.div
-              initial={false}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.1 }}
               className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-background/40 px-4 py-1.5 text-xs sm:text-sm backdrop-blur-md"
             >
               <Sparkles className="h-3.5 w-3.5 text-gold-300" />
               <span className="text-gold-100/90">{t('badge')}</span>
             </motion.div>
 
-            <motion.div
-              initial={false}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-6 rounded-[2rem] border border-gold-400/20 bg-[#3d2918]/90 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl"
+              transition={{ duration: 0.9, ease, delay: 0.2 }}
+              className="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.02] tracking-tight"
             >
-              <motion.h1
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.02] tracking-tight"
+              <span className="block text-foreground">{t('title')}</span>
+              <span
+                className="block mt-2 text-gold-gradient"
+                style={{ filter: 'drop-shadow(0 0 30px rgba(212,175,55,0.25))' }}
               >
-                <span className="block text-foreground">{t('title')}</span>
-                <span
-                  className="block mt-2 text-gold-gradient"
-                  style={{ filter: 'drop-shadow(0 0 30px rgba(212,175,55,0.25))' }}
-                >
-                  {t('titleHighlight')}
-                </span>
-              </motion.h1>
+                {t('titleHighlight')}
+              </span>
+            </motion.h1>
 
-              <motion.p
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-6 max-w-xl text-base sm:text-lg text-foreground/70 leading-relaxed"
-              >
-                {t('subtitle')}
-              </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.45 }}
+              className="mt-6 max-w-xl text-base sm:text-lg text-foreground/70 leading-relaxed"
+            >
+              {t('subtitle')}
+            </motion.p>
 
-              <motion.div
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-8 flex flex-wrap items-center gap-4"
-              >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.6 }}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
               <Link
                 href="/#booking"
                 className={cn(
                   'group inline-flex items-center gap-2 rounded-full',
                   'bg-gold-gradient text-ink-900 px-7 py-3.5 text-sm sm:text-base font-bold',
                   'shadow-gold hover:shadow-gold-lg',
-                  'transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]',
+                  'transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]',
                 )}
               >
                 {t('search.cta')}
@@ -130,16 +133,17 @@ export function Hero() {
               </Link>
               <Link
                 href="/fleet"
-                className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-gold-200 hover:bg-gold-400/5 transition-all duration-200"
+                className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
               >
                 {tFleet('viewAll')}
               </Link>
             </motion.div>
-           </motion.div>
- 
+
+            {/* Stats */}
             <motion.dl
-              initial={false}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.8 }}
               className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl"
             >
               {stats.map((s, i) => (
@@ -158,34 +162,40 @@ export function Hero() {
             </motion.dl>
           </div>
 
+          {/* Car visual */}
           <motion.div
-            initial={false}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease, delay: 0.3 }}
             className="lg:col-span-5 relative"
           >
             <CarVisual />
           </motion.div>
         </div>
 
+        {/* Search form overlay */}
         <motion.div
           id="booking"
-          initial={false}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease, delay: 0.9 }}
           className="mt-14 lg:mt-20"
         >
           <SearchForm />
         </motion.div>
       </motion.div>
 
+      {/* Scroll indicator */}
       <motion.button
         type="button"
         onClick={() => {
           const el = document.getElementById('fleet-section');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
-        initial={false}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-gold-300/80 hover:text-gold-200 transition-colors duration-200"
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-gold-300/80 hover:text-gold-200"
         aria-label="Scroll to fleet"
       >
         <span className="text-[10px] uppercase tracking-[0.4em]">{t('explore')}</span>

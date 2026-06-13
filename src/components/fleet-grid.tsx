@@ -10,26 +10,6 @@ import type { Car } from '@/lib/cars.types';
 
 type Cat = Car['category'];
 
-const FleetTitle = React.memo(() => {
-  const t = useTranslations('fleet');
-  return (
-    <motion.div
-      initial={false}
-      animate={{ opacity: 1, y: 0 }}
-      className="text-center max-w-2xl mx-auto mb-12"
-    >
-      <span className="text-xs uppercase tracking-[0.4em] text-gold-300">
-        {t('title')}
-      </span>
-      <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-bold">
-        <span className="text-gold-gradient">{t('title')}</span>
-      </h1>
-      <p className="mt-4 text-foreground/60">{t('subtitle')}</p>
-    </motion.div>
-  );
-});
-FleetTitle.displayName = 'FleetTitle';
-
 export function FleetGrid({ cars }: { cars: Car[] }) {
   const t = useTranslations('fleet');
   const searchParams = useSearchParams();
@@ -66,7 +46,20 @@ export function FleetGrid({ cars }: { cars: Car[] }) {
 
   return (
     <section className="container py-16 sm:py-24">
-      <FleetTitle />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="text-center max-w-2xl mx-auto mb-12"
+      >
+        <span className="text-xs uppercase tracking-[0.4em] text-gold-300">
+          {t('title')}
+        </span>
+        <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-bold">
+          <span className="text-gold-gradient">{t('title')}</span>
+        </h1>
+        <p className="mt-4 text-foreground/60">{t('subtitle')}</p>
+      </motion.div>
 
       <div className="mb-10">
         <FleetFilters
@@ -82,7 +75,7 @@ export function FleetGrid({ cars }: { cars: Car[] }) {
 
       {filtered.length === 0 ? (
         <motion.div
-          initial={false}
+          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="text-center py-20 text-foreground/50"
         >
@@ -90,8 +83,8 @@ export function FleetGrid({ cars }: { cars: Car[] }) {
         </motion.div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((car) => (
-            <CarCard key={car.id} car={car} />
+          {filtered.map((car, i) => (
+            <CarCard key={car.id} car={car} index={i} />
           ))}
         </div>
       )}
