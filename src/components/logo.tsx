@@ -7,8 +7,8 @@ type LogoProps = React.SVGProps<SVGSVGElement> & {
 };
 
 /**
- * First Car — Rich Gold inline SVG logo.
- * The Arabic wordmark "فرست كار" sits above "First Car" in a clean sans-serif.
+ * Al-Hossam Cars — Rich Gold inline SVG logo.
+ * The Arabic wordmark "الحسام للسيارات" sits above "Al-Hossam Cars" in a clean sans-serif.
  * Pure SVG so it scales crisply and inherits `currentColor` only on the
  * stylized border mark; the gold gradient is locked to brand gold.
  */
@@ -17,7 +17,7 @@ export function Logo({ size = 44, showSubtext = true, className, ...props }: Log
   return (
     <div
       className={cn('inline-flex items-center gap-3 select-none', className)}
-      aria-label="First Car - فرست كار"
+      aria-label="Al-Hossam Cars - الحسام للسيارات"
       role="img"
     >
       {/* Monogram mark — shield with stylized "F" and crown */}
@@ -94,10 +94,10 @@ export function Logo({ size = 44, showSubtext = true, className, ...props }: Log
               textShadow: '0 0 20px rgba(212,175,55,0.15)',
             }}
           >
-            فرست كار
+            الحسام للسيارات
           </span>
           <span className="mt-1 text-[0.62rem] sm:text-[0.7rem] uppercase tracking-[0.35em] text-gold-400/90 font-medium">
-            First Car
+            Al-Hossam Cars
           </span>
         </div>
       )}

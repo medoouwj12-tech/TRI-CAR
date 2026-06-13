@@ -15,7 +15,7 @@ export function Providers({
   messages: any;
 }) {
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages} timeZone="Africa/Cairo">
       <NextThemesProvider
         attribute="class"
         defaultTheme="dark"
