@@ -19,6 +19,7 @@ import {
   Clock,
   XCircle,
   Phone,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { Logo } from './logo';
 import { cn } from '@/lib/utils';
@@ -109,14 +110,16 @@ export function AdminDashboard() {
             onAdd={() => setAdding(true)}
             onEdit={(c) => setEditing(c)}
             onDelete={async (id) => {
-              if (!confirm('Delete this car?')) return;
+              if (!confirm(t('confirmDeleteCar') || 'Delete this car?')) return;
               await fetch(`/api/admin/cars/${id}`, { method: 'DELETE' });
               fetchAll();
             }}
             onRefresh={fetchAll}
           />
         )}
-        {tab === 'bookings' && <BookingsView bookings={bookings} loading={loading} />}
+        {tab === 'bookings' && (
+          <BookingsView bookings={bookings} loading={loading} onRefresh={fetchAll} />
+        )}
 
         {/* Modal */}
         {(editing || adding) && (
@@ -223,6 +226,7 @@ function CarsView({
   onAdd,
   onEdit,
   onDelete,
+  onRefresh,
 }: {
   cars: Car[];
   loading: boolean;
@@ -239,6 +243,23 @@ function CarsView({
       `${c.make} ${c.model}`.toLowerCase().includes(q.toLowerCase()) ||
       c.category.toLowerCase().includes(q.toLowerCase()),
   );
+
+  const handleToggle = async (car: Car, field: 'isAvailable' | 'featured') => {
+    try {
+      const res = await fetch(`/api/admin/cars/${car.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          [field]: !car[field],
+        }),
+      });
+      if (res.ok) {
+        onRefresh();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div>
@@ -273,7 +294,7 @@ function CarsView({
               className="flex items-center gap-3 rounded-2xl border border-gold-400/15 bg-card/60 p-3 hover:border-gold-400/40 transition-all"
             >
               <div
-                className="h-14 w-20 rounded-lg bg-cover bg-center shrink-0"
+                className="h-14 w-20 rounded-lg bg-cover bg-center shrink-0 border border-gold-400/20"
                 style={{ backgroundImage: `url(${c.imageUrl})` }}
               />
               <div className="flex-1 min-w-0">
@@ -283,9 +304,36 @@ function CarsView({
                 <p className="text-[10px] uppercase tracking-widest text-gold-300">
                   {c.category} · {c.year} · {c.seats} seats
                 </p>
-                <p className="text-xs text-foreground/50">
-                  {formatCurrency(c.pricePerDay, 'en')} / day
-                </p>
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1 text-xs">
+                  <span className="text-foreground/50">
+                    {formatCurrency(c.pricePerDay, 'en')} / day
+                  </span>
+                  <span className="text-foreground/20">•</span>
+                  <button
+                    onClick={() => handleToggle(c, 'isAvailable')}
+                    className={cn(
+                      'text-[9px] font-bold px-2 py-0.5 rounded-full border transition-all',
+                      c.isAvailable
+                        ? 'border-emerald-500/30 text-emerald-300 bg-emerald-500/5 hover:border-emerald-500/60 hover:bg-emerald-500/10'
+                        : 'border-red-500/30 text-red-300 bg-red-500/5 hover:border-red-500/60 hover:bg-red-500/10',
+                    )}
+                  >
+                    {c.isAvailable ? t('stats.available') : t('unavailable')}
+                  </button>
+                  <span className="text-foreground/20">•</span>
+                  <button
+                    onClick={() => handleToggle(c, 'featured')}
+                    className={cn(
+                      'inline-flex items-center gap-0.5 text-[9px] font-bold px-2 py-0.5 rounded-full border transition-all',
+                      c.featured
+                        ? 'border-gold-400/40 text-gold-200 bg-gold-400/10 hover:border-gold-400/70 hover:bg-gold-400/20'
+                        : 'border-foreground/20 text-foreground/40 hover:border-foreground/40 hover:bg-foreground/5',
+                    )}
+                  >
+                    <Star className={cn('h-2.5 w-2.5', c.featured && 'fill-gold-300 text-gold-300')} />
+                    {t('featured')}
+                  </button>
+                </div>
               </div>
               <div className="flex items-center gap-1">
                 <IconBtn onClick={() => onEdit(c)} label="Edit">
@@ -330,8 +378,46 @@ function IconBtn({
   );
 }
 
-function BookingsView({ bookings, loading }: { bookings: any[]; loading: boolean }) {
+function BookingsView({
+  bookings,
+  loading,
+  onRefresh,
+}: {
+  bookings: any[];
+  loading: boolean;
+  onRefresh: () => void;
+}) {
   const t = useTranslations('admin');
+
+  const handleStatusChange = async (id: string, status: string) => {
+    try {
+      const res = await fetch('/api/admin/bookings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status }),
+      });
+      if (res.ok) {
+        onRefresh();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm(t('confirmDeleteBooking') || 'Delete this booking?')) return;
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        onRefresh();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-gold-gradient mb-6">{t('bookings')}</h1>
@@ -340,36 +426,87 @@ function BookingsView({ bookings, loading }: { bookings: any[]; loading: boolean
       ) : bookings.length === 0 ? (
         <p className="text-foreground/50">No booking requests yet.</p>
       ) : (
-        <div className="space-y-2">
-          {bookings.map((b) => (
-            <div
-              key={b.id}
-              className="rounded-2xl border border-gold-400/15 bg-card/60 p-4"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="text-sm font-bold">{b.name}</p>
-                  <p className="text-xs text-foreground/60">
+        <div className="space-y-3">
+          {bookings.map((b) => {
+            // Format phone number for WhatsApp Egypt (+20)
+            let cleanPhone = b.phone.replace(/\D/g, '');
+            if (!cleanPhone.startsWith('20') && !cleanPhone.startsWith('+')) {
+              if (cleanPhone.startsWith('01')) {
+                cleanPhone = '20' + cleanPhone.substring(1);
+              } else {
+                cleanPhone = '20' + cleanPhone;
+              }
+            }
+            const carName = b.car ? `${b.car.make} ${b.car.model}` : '';
+            const msg = `مرحباً ${b.name}، نتواصل معك من شركة فرست كار للسيارات بخصوص طلب حجز السيارة ${carName}.`;
+            const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+
+            return (
+              <div
+                key={b.id}
+                className="rounded-2xl border border-gold-400/15 bg-card/60 backdrop-blur-xl p-5 hover:border-gold-400/30 transition-all flex flex-col md:flex-row justify-between md:items-center gap-4"
+              >
+                <div className="min-w-0 flex-1 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-bold text-foreground">{b.name}</p>
+                    <StatusPill status={b.status} />
+                  </div>
+                  <p className="text-xs text-gold-300">
                     {b.car ? `${b.car.make} ${b.car.model}` : b.carId}
                   </p>
-                  <p className="mt-2 text-xs text-foreground/70">
-                    {new Date(b.date).toLocaleString()} · {b.passengers} pax
-                  </p>
-                  <p className="text-xs text-foreground/50">
-                    {b.pickupLocation} → {b.dropoffLocation}
-                  </p>
-                  <a
-                    href={`tel:${b.phone}`}
-                    className="mt-2 inline-flex items-center gap-1.5 text-xs text-gold-300"
-                  >
-                    <Phone className="h-3 w-3" />
-                    {b.phone}
-                  </a>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 mt-2 text-xs text-foreground/60">
+                    <p>📅 {new Date(b.date).toLocaleString()} · {b.passengers} pax</p>
+                    <p>📍 {b.pickupLocation} → {b.dropoffLocation}</p>
+                    {b.email && <p>✉️ {b.email}</p>}
+                    {b.notes && <p className="italic text-foreground/40 sm:col-span-2">📝 {b.notes}</p>}
+                  </div>
+                  <div className="flex items-center gap-3 mt-3">
+                    <a
+                      href={`tel:${b.phone}`}
+                      className="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-200"
+                    >
+                      <Phone className="h-3 w-3" />
+                      {b.phone}
+                    </a>
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-bold"
+                    >
+                      💬 {t('whatsappChat')}
+                    </a>
+                  </div>
                 </div>
-                <StatusPill status={b.status} />
+
+                {/* Actions */}
+                <div className="flex flex-wrap items-center gap-3 shrink-0 border-t border-gold-400/10 md:border-t-0 pt-3 md:pt-0">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[9px] uppercase tracking-widest text-foreground/40">{t('changeStatus')}</span>
+                    <select
+                      value={b.status}
+                      onChange={(e) => handleStatusChange(b.id, e.target.value)}
+                      className="bg-ink-900 border border-gold-400/20 text-xs text-foreground/80 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-gold-400/60"
+                    >
+                      <option value="PENDING">Pending</option>
+                      <option value="CONTACTED">Contacted</option>
+                      <option value="CONFIRMED">Confirmed</option>
+                      <option value="COMPLETED">Completed</option>
+                      <option value="CANCELLED">Cancelled</option>
+                    </select>
+                  </div>
+
+                  <button
+                    onClick={() => handleDelete(b.id)}
+                    className="mt-4 p-2 border border-red-500/20 text-red-400 hover:border-red-500/50 hover:bg-red-500/10 rounded-xl transition-all"
+                    title={t('deleteBooking')}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
@@ -429,8 +566,45 @@ function CarFormModal({
   );
   const [featuresStr, setFeaturesStr] = React.useState((car?.features || []).join(', '));
   const [saving, setSaving] = React.useState(false);
+  const [uploading, setUploading] = React.useState(false);
 
   const set = (k: keyof Car, v: any) => setForm((f) => ({ ...f, [k]: v }));
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isGallery = false) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    setUploading(true);
+    try {
+      const urls: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
+        formData.append('file', files[i]);
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await res.json();
+        if (data.ok && data.url) {
+          urls.push(data.url);
+        } else {
+          alert(data.error || 'Upload failed');
+        }
+      }
+      if (isGallery) {
+        setForm((f) => ({
+          ...f,
+          gallery: [...(f.gallery || []), ...urls],
+        }));
+      } else if (urls.length > 0) {
+        set('imageUrl', urls[0]);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const save = async () => {
     setSaving(true);
@@ -450,7 +624,7 @@ function CarFormModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink-900/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink-900/80 backdrop-blur-md text-foreground">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -465,7 +639,7 @@ function CarFormModal({
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Inp label="Make" value={String(form.make ?? '')} onChange={(v) => set('make', v)} />
           <Inp label="Model" value={String(form.model ?? '')} onChange={(v) => set('model', v)} />
           <Inp label="Year" type="number" value={String(form.year ?? '')} onChange={(v) => set('year', Number(v))} />
@@ -487,12 +661,81 @@ function CarFormModal({
             value={String(form.seats ?? '')}
             onChange={(v) => set('seats', Number(v))}
           />
-          <Inp
-            label="Image URL"
-            value={String(form.imageUrl ?? '')}
-            onChange={(v) => set('imageUrl', v)}
-            className="sm:col-span-2"
-          />
+
+          {/* Main Image Upload Zone */}
+          <div className="sm:col-span-2 space-y-2">
+            <span className="text-[10px] uppercase tracking-widest text-foreground/50">{t('uploadImage')}</span>
+            <div className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl border border-gold-400/20 bg-background/40">
+              {form.imageUrl ? (
+                <div className="relative h-24 w-36 rounded-xl overflow-hidden border border-gold-400/30 shrink-0">
+                  <img src={form.imageUrl} alt="Car preview" className="h-full w-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => set('imageUrl', '')}
+                    className="absolute top-1 right-1 rounded-full p-1 bg-ink-900/80 hover:bg-ink-900 text-red-400"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ) : (
+                <div className="h-24 w-36 rounded-xl border-2 border-dashed border-gold-400/30 flex items-center justify-center text-foreground/30 shrink-0">
+                  <ImageIcon className="h-8 w-8" />
+                </div>
+              )}
+              <div className="flex-1 w-full text-center sm:text-left">
+                <label className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gold-gradient text-ink-900 font-bold text-xs cursor-pointer shadow-gold hover:shadow-gold-lg transition-all">
+                  {uploading ? t('uploading') : t('uploadImage')}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, false)}
+                    className="hidden"
+                    disabled={uploading}
+                  />
+                </label>
+                <p className="text-[10px] text-foreground/40 mt-1">{t('dragDropImage')}</p>
+              </div>
+            </div>
+            {/* Fallback URL input */}
+            <Inp label="Or Paste Image URL" value={String(form.imageUrl ?? '')} onChange={(v) => set('imageUrl', v)} />
+          </div>
+
+          {/* Gallery Upload Grid */}
+          <div className="sm:col-span-2 space-y-2">
+            <span className="text-[10px] uppercase tracking-widest text-foreground/50">{t('uploadGallery')}</span>
+            <div className="p-4 rounded-2xl border border-gold-400/20 bg-background/40 space-y-3">
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                {(form.gallery || []).map((url, index) => (
+                  <div key={url + index} className="relative h-16 rounded-lg overflow-hidden border border-gold-400/20">
+                    <img src={url} alt={`Gallery ${index}`} className="h-full w-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newGallery = (form.gallery || []).filter((_, i) => i !== index);
+                        set('gallery', newGallery);
+                      }}
+                      className="absolute top-1 right-1 rounded-full p-0.5 bg-ink-900/80 hover:bg-ink-900 text-red-400"
+                    >
+                      <X className="h-2.5 w-2.5" />
+                    </button>
+                  </div>
+                ))}
+                <label className="h-16 rounded-lg border-2 border-dashed border-gold-400/30 hover:border-gold-400/60 flex flex-col items-center justify-center cursor-pointer text-foreground/40 transition-all">
+                  <Plus className="h-5 w-5" />
+                  <span className="text-[8px] font-bold mt-1">Add Image</span>
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, true)}
+                    className="hidden"
+                    disabled={uploading}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+
           <Inp
             label="Features (comma separated)"
             value={featuresStr}
@@ -511,42 +754,48 @@ function CarFormModal({
             onChange={(v) => set('fuelType', v as any)}
             options={['GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC']}
           />
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={!!form.withDriver}
-              onChange={(e) => set('withDriver', e.target.checked)}
-            />
-            With driver
-          </label>
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={!!form.isAvailable}
-              onChange={(e) => set('isAvailable', e.target.checked)}
-            />
-            Available
-          </label>
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={!!form.featured}
-              onChange={(e) => set('featured', e.target.checked)}
-            />
-            Featured
-          </label>
+          
+          <div className="flex flex-wrap gap-4 sm:col-span-2 mt-2">
+            <label className="flex items-center gap-2 text-sm text-foreground/80 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={!!form.withDriver}
+                onChange={(e) => set('withDriver', e.target.checked)}
+                className="accent-gold-400"
+              />
+              With driver
+            </label>
+            <label className="flex items-center gap-2 text-sm text-foreground/80 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={!!form.isAvailable}
+                onChange={(e) => set('isAvailable', e.target.checked)}
+                className="accent-gold-400"
+              />
+              Available
+            </label>
+            <label className="flex items-center gap-2 text-sm text-foreground/80 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={!!form.featured}
+                onChange={(e) => set('featured', e.target.checked)}
+                className="accent-gold-400"
+              />
+              Featured
+            </label>
+          </div>
         </div>
 
-        <div className="mt-5 flex justify-end gap-2">
+        <div className="mt-6 flex justify-end gap-2 border-t border-gold-400/10 pt-4">
           <button
             onClick={onClose}
-            className="rounded-full border border-gold-400/30 px-5 py-2 text-sm font-semibold text-gold-200 hover:bg-gold-400/5"
+            className="rounded-full border border-gold-400/30 px-5 py-2 text-sm font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
           >
             Cancel
           </button>
           <button
             onClick={save}
-            disabled={saving}
+            disabled={saving || uploading}
             className="rounded-full bg-gold-gradient text-ink-900 px-6 py-2 text-sm font-bold shadow-gold hover:shadow-gold-lg transition-all disabled:opacity-60"
           >
             {saving ? 'Saving…' : 'Save'}
