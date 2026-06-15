@@ -30,6 +30,7 @@ const linkGroups = [
 export function Footer() {
   const t = useTranslations('footer');
   const tNav = useTranslations('nav');
+  const tAdmin = useTranslations('admin');
   const year = new Date().getFullYear();
 
   return (
@@ -111,7 +112,13 @@ export function Footer() {
 
         <div className="mt-14 pt-6 border-t border-gold-400/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-foreground/50">
           <p>© {year} الحسام للسيارات — Al-Hossam Cars. {t('rights')}.</p>
-          <p className="tracking-widest uppercase">Crafted for excellence</p>
+          <div className="flex items-center gap-3">
+            <Link href="/admin" className="hover:text-gold-300 transition-colors">
+              {tAdmin('title')}
+            </Link>
+            <span>·</span>
+            <p className="tracking-widest uppercase">Crafted for excellence</p>
+          </div>
         </div>
       </div>
     </footer>
