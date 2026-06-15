@@ -42,11 +42,19 @@ export function Hero() {
         style={{ y: yBg, scale: scaleFade }}
         className="absolute inset-0 -z-10"
       >
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900" />
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/hero-banner.png')",
+          }}
+        />
+        {/* Gradients to merge background image cleanly with web colors and text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-900/90 via-ink-900/70 to-ink-900/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-900/20 via-transparent to-ink-900" />
         {/* Radial gold glow */}
         <div
-          className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-50"
+          className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-35"
           style={{
             background:
               'radial-gradient(closest-side, rgba(212,175,55,0.35), transparent 70%)',
@@ -78,7 +86,7 @@ export function Hero() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Copy */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -162,15 +170,8 @@ export function Hero() {
             </motion.dl>
           </div>
 
-          {/* Car visual */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease, delay: 0.3 }}
-            className="lg:col-span-5 relative"
-          >
-            <CarVisual />
-          </motion.div>
+          {/* Spacer to expose the keys and horse logo on the right side of the background banner */}
+          <div className="hidden lg:block lg:col-span-4" />
         </div>
 
         {/* Search form overlay */}
@@ -300,243 +301,6 @@ function Field({
         <div className="mt-0.5">{children}</div>
       </div>
     </label>
-  );
-}
-
-/**
- * Cinematic car visual — pure SVG / CSS, no external image dependency.
- * A sleek black-and-gold silhouette of a sedan that reads as "luxury"
- * without needing a real photo (which the user will add later).
- */
-function CarVisual() {
-  return (
-    <div className="relative aspect-[4/3] w-full">
-      {/* Halo */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(212,175,55,0.35) 0%, transparent 60%)',
-          filter: 'blur(30px)',
-        }}
-      />
-
-      {/* Subtle pedestal */}
-      <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[80%] h-3 rounded-full bg-gold-400/20 blur-xl" />
-
-      <motion.svg
-        viewBox="0 0 600 400"
-        className="absolute inset-0 h-full w-full drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)]"
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.2, ease }}
-        aria-label="Luxury car"
-      >
-        <defs>
-          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#1a1a1a" />
-            <stop offset="55%" stopColor="#0a0a0a" />
-            <stop offset="100%" stopColor="#000" />
-          </linearGradient>
-          <linearGradient id="windowGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#1f1f1f" />
-            <stop offset="100%" stopColor="#0a0a0a" />
-          </linearGradient>
-          <linearGradient id="goldRim" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#F1D989" />
-            <stop offset="50%" stopColor="#D4AF37" />
-            <stop offset="100%" stopColor="#B8941F" />
-          </linearGradient>
-          <linearGradient id="goldHighlight" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
-            <stop offset="50%" stopColor="#F1D989" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        {/* Body */}
-        <path
-          d="M70 260 C 80 200, 130 160, 200 150 L 360 140 C 420 138, 470 155, 510 200 L 540 230 C 555 240, 560 255, 555 270 L 540 280 L 80 280 Z"
-          fill="url(#bodyGrad)"
-          stroke="url(#goldRim)"
-          strokeWidth="1.2"
-        />
-
-        {/* Roof / glass */}
-        <path
-          d="M180 160 C 220 130, 280 120, 360 122 C 410 124, 450 145, 480 175 L 460 195 L 200 195 Z"
-          fill="url(#windowGrad)"
-          stroke="url(#goldRim)"
-          strokeWidth="0.8"
-          opacity="0.9"
-        />
-
-        {/* Window divider */}
-        <line
-          x1="320"
-          y1="125"
-          x2="320"
-          y2="195"
-          stroke="url(#goldRim)"
-          strokeWidth="0.8"
-        />
-
-        {/* Gold highlight strip */}
-        <rect
-          x="80"
-          y="240"
-          width="470"
-          height="2"
-          fill="url(#goldHighlight)"
-          opacity="0.7"
-        />
-
-        {/* Door lines */}
-        <path
-          d="M230 195 L 230 270"
-          stroke="url(#goldRim)"
-          strokeWidth="0.6"
-          opacity="0.4"
-        />
-        <path
-          d="M340 195 L 340 270"
-          stroke="url(#goldRim)"
-          strokeWidth="0.6"
-          opacity="0.4"
-        />
-        <path
-          d="M420 195 L 420 270"
-          stroke="url(#goldRim)"
-          strokeWidth="0.6"
-          opacity="0.4"
-        />
-
-        {/* Headlight */}
-        <path
-          d="M70 240 C 60 240, 55 248, 60 258 L 90 258 L 95 248 Z"
-          fill="#F1D989"
-          opacity="0.95"
-        />
-        <ellipse cx="76" cy="248" rx="6" ry="2" fill="#fff" opacity="0.8" />
-
-        {/* Taillight */}
-        <path
-          d="M540 240 L 555 240 C 560 245, 558 255, 552 258 L 540 258 Z"
-          fill="#D4AF37"
-          opacity="0.8"
-        />
-
-        {/* Grille */}
-        <rect
-          x="60"
-          y="260"
-          width="35"
-          height="6"
-          rx="1"
-          fill="url(#goldRim)"
-          opacity="0.6"
-        />
-
-        {/* Front wheel arch */}
-        <ellipse
-          cx="170"
-          cy="280"
-          rx="55"
-          ry="22"
-          fill="#000"
-        />
-        {/* Rear wheel arch */}
-        <ellipse
-          cx="450"
-          cy="280"
-          rx="55"
-          ry="22"
-          fill="#000"
-        />
-
-        {/* Front wheel */}
-        <g>
-          <circle cx="170" cy="285" r="32" fill="#0a0a0a" stroke="url(#goldRim)" strokeWidth="1" />
-          <circle cx="170" cy="285" r="20" fill="#1a1a1a" stroke="url(#goldRim)" strokeWidth="0.6" />
-          {[0, 60, 120, 180, 240, 300].map((deg) => (
-            <line
-              key={`f-${deg}`}
-              x1="170"
-              y1="285"
-              x2={170 + 18 * Math.cos((deg * Math.PI) / 180)}
-              y2={285 + 18 * Math.sin((deg * Math.PI) / 180)}
-              stroke="url(#goldRim)"
-              strokeWidth="1"
-            />
-          ))}
-          <circle cx="170" cy="285" r="4" fill="url(#goldRim)" />
-        </g>
-
-        {/* Rear wheel */}
-        <g>
-          <circle cx="450" cy="285" r="32" fill="#0a0a0a" stroke="url(#goldRim)" strokeWidth="1" />
-          <circle cx="450" cy="285" r="20" fill="#1a1a1a" stroke="url(#goldRim)" strokeWidth="0.6" />
-          {[0, 60, 120, 180, 240, 300].map((deg) => (
-            <line
-              key={`r-${deg}`}
-              x1="450"
-              y1="285"
-              x2={450 + 18 * Math.cos((deg * Math.PI) / 180)}
-              y2={285 + 18 * Math.sin((deg * Math.PI) / 180)}
-              stroke="url(#goldRim)"
-              strokeWidth="1"
-            />
-          ))}
-          <circle cx="450" cy="285" r="4" fill="url(#goldRim)" />
-        </g>
-
-        {/* Ground reflection */}
-        <ellipse
-          cx="310"
-          cy="335"
-          rx="240"
-          ry="6"
-          fill="url(#goldHighlight)"
-          opacity="0.3"
-        />
-      </motion.svg>
-
-      {/* Floating gold particles */}
-      {Array.from({ length: 8 }).map((_, i) => (
-        <motion.span
-          key={i}
-          className="absolute h-1 w-1 rounded-full bg-gold-300"
-          style={{
-            top: `${10 + (i * 11) % 80}%`,
-            left: `${5 + (i * 13) % 85}%`,
-            boxShadow: '0 0 10px rgba(241, 217, 137, 0.8)',
-          }}
-          animate={{
-            y: [0, -10, 0],
-            opacity: [0.3, 1, 0.3],
-          }}
-          transition={{
-            duration: 3 + (i % 3),
-            repeat: Infinity,
-            delay: i * 0.3,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-
-      {/* Rating badge */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 rounded-2xl border border-gold-400/30 glass dark:glass px-3 py-2 flex items-center gap-2 shadow-gold-sm"
-      >
-        <Star className="h-4 w-4 text-gold-300 fill-gold-300" />
-        <span className="text-sm font-bold text-foreground">4.9</span>
-        <span className="text-xs text-foreground/60">VIP</span>
-      </motion.div>
-    </div>
   );
 }
 
