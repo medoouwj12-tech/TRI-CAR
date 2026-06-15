@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { Calendar, MapPin, Users, ArrowRight, ChevronDown, Sparkles, Star } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight, ChevronDown, Sparkles, Star } from 'lucide-react';
 import { Link, useRouter } from '@/i18n/routing';
 import { saveSearchPrefs } from '@/lib/search-prefs';
 import { cn } from '@/lib/utils';
@@ -216,7 +216,6 @@ function SearchForm() {
   const [pickup, setPickup] = React.useState('');
   const [dropoff, setDropoff] = React.useState('');
   const [date, setDate] = React.useState('');
-  const [passengers, setPassengers] = React.useState(2);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -224,12 +223,8 @@ function SearchForm() {
       pickupLocation: pickup.trim() || undefined,
       dropoffLocation: dropoff.trim() || undefined,
       date: date || undefined,
-      passengers,
     });
-    const params = new URLSearchParams();
-    if (passengers > 1) params.set('passengers', String(passengers));
-    const qs = params.toString();
-    router.push(qs ? `/fleet?${qs}` : '/fleet');
+    router.push('/fleet');
   };
 
   return (
@@ -242,7 +237,7 @@ function SearchForm() {
       )}
     >
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-gold-400/[0.04] via-transparent to-gold-400/[0.06]" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 p-4 sm:p-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-4 sm:p-5">
         <Field icon={MapPin} label={t('pickup')}>
           <input
             type="text"
@@ -268,19 +263,6 @@ function SearchForm() {
             onChange={(e) => setDate(e.target.value)}
             className="w-full bg-transparent text-sm text-foreground/90 focus:outline-none [color-scheme:dark]"
           />
-        </Field>
-        <Field icon={Users} label={t('passengers')}>
-          <select
-            value={passengers}
-            onChange={(e) => setPassengers(Number(e.target.value))}
-            className="w-full bg-transparent text-sm text-foreground focus:outline-none appearance-none cursor-pointer"
-          >
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-              <option key={n} value={n} className="bg-ink-900 text-foreground">
-                {n} {n === 1 ? t('person') : t('people')}
-              </option>
-            ))}
-          </select>
         </Field>
         <button
           type="submit"

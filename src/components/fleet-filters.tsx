@@ -14,16 +14,12 @@ export function FleetFilters({
   setQuery,
   category,
   setCategory,
-  driverFilter,
-  setDriverFilter,
   total,
 }: {
   query: string;
   setQuery: (v: string) => void;
   category: Cat | 'ALL';
   setCategory: (v: Cat | 'ALL') => void;
-  driverFilter: 'ALL' | 'WITH' | 'SELF';
-  setDriverFilter: (v: 'ALL' | 'WITH' | 'SELF') => void;
   total: number;
 }) {
   const t = useTranslations('fleet');
@@ -75,30 +71,6 @@ export function FleetFilters({
               )}
             >
               {c === 'ALL' ? t('filters.all') : t(`categories.${c}`)}
-            </button>
-          ))}
-        </div>
-
-        {/* Driver filter */}
-        <div className="flex items-center gap-1.5 rounded-full border border-gold-400/20 p-1 self-start">
-          {(
-            [
-              { v: 'ALL', l: t('filters.all') },
-              { v: 'WITH', l: t('filters.withDriver') },
-              { v: 'SELF', l: t('filters.selfDrive') },
-            ] as const
-          ).map((opt) => (
-            <button
-              key={opt.v}
-              onClick={() => setDriverFilter(opt.v)}
-              className={cn(
-                'rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all',
-                driverFilter === opt.v
-                  ? 'bg-gold-gradient text-ink-900'
-                  : 'text-foreground/70 hover:text-gold-200',
-              )}
-            >
-              {opt.l}
             </button>
           ))}
         </div>

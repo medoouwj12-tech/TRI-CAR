@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { CarCard } from '@/components/car-card';
@@ -12,26 +11,12 @@ type Cat = Car['category'];
 
 export function FleetGrid({ cars }: { cars: Car[] }) {
   const t = useTranslations('fleet');
-  const searchParams = useSearchParams();
   const [query, setQuery] = React.useState('');
   const [category, setCategory] = React.useState<Cat | 'ALL'>('ALL');
-  const [driverFilter, setDriverFilter] = React.useState<'ALL' | 'WITH' | 'SELF'>('ALL');
-  const [minPassengers, setMinPassengers] = React.useState(1);
-
-  React.useEffect(() => {
-    const p = searchParams.get('passengers');
-    if (p) {
-      const n = Number(p);
-      if (Number.isFinite(n) && n >= 1) setMinPassengers(n);
-    }
-  }, [searchParams]);
 
   const filtered = React.useMemo(() => {
     return cars.filter((c) => {
-      if (c.seats < minPassengers) return false;
       if (category !== 'ALL' && c.category !== category) return false;
-      if (driverFilter === 'WITH' && !c.withDriver) return false;
-      if (driverFilter === 'SELF' && c.withDriver) return false;
       if (query) {
         const q = query.toLowerCase();
         return (
@@ -42,7 +27,7 @@ export function FleetGrid({ cars }: { cars: Car[] }) {
       }
       return true;
     });
-  }, [cars, query, category, driverFilter, minPassengers]);
+  }, [cars, query, category]);
 
   return (
     <section className="container py-16 sm:py-24">
@@ -67,8 +52,6 @@ export function FleetGrid({ cars }: { cars: Car[] }) {
           setQuery={setQuery}
           category={category}
           setCategory={setCategory}
-          driverFilter={driverFilter}
-          setDriverFilter={setDriverFilter}
           total={filtered.length}
         />
       </div>

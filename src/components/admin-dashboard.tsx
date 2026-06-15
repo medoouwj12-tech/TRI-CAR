@@ -188,7 +188,6 @@ function StatsView({
   const items = [
     { label: t('totalCars'), value: cars.length, icon: CarIcon },
     { label: t('available'), value: cars.filter((c) => c.isAvailable).length, icon: CheckCircle2 },
-    { label: t('withDriver'), value: cars.filter((c) => c.withDriver).length, icon: Star },
     { label: t('bookings'), value: bookings.length, icon: CalendarCheck },
     { label: t('pending'), value: stats.pending ?? 0, icon: Clock },
     {
@@ -236,6 +235,7 @@ function CarsView({
   onRefresh: () => void;
 }) {
   const t = useTranslations('admin');
+  const tFleet = useTranslations('fleet');
   const [q, setQ] = React.useState('');
   const filtered = cars.filter(
     (c) =>
@@ -302,7 +302,7 @@ function CarsView({
                   {c.make} {c.model}
                 </p>
                 <p className="text-[10px] uppercase tracking-widest text-gold-300">
-                  {c.category} · {c.year} · {c.seats} seats
+                  {tFleet(`categories.${c.category}`)} · {c.year}
                 </p>
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1 text-xs">
                   <span className="text-foreground/50">
