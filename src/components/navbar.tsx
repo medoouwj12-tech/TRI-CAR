@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-mot
 import { useTranslations } from 'next-intl';
 import { Menu, X, Phone } from 'lucide-react';
 import { Logo } from './logo';
-import { ThemeToggle } from './theme-toggle';
+
 import { LanguageToggle } from './language-toggle';
 import { Link, usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
@@ -64,7 +64,7 @@ export function Navbar() {
             'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8',
             'rounded-2xl transition-all duration-500',
             scrolled
-              ? 'glass-light dark:glass border border-gold-400/20 shadow-gold-sm'
+              ? 'glass-light border border-gold-400/20 shadow-gold-sm'
               : 'border border-transparent',
           )}
         >
@@ -92,7 +92,7 @@ export function Navbar() {
             </ul>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <ThemeToggle />
+
               <Link
                 href="/#booking"
                 className={cn(
@@ -131,7 +131,7 @@ export function Navbar() {
             : 'inset(0% 0% 100% 0%)',
         }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="lg:hidden fixed inset-0 z-40 bg-ink-900/98 dark:bg-ink-900/98 backdrop-blur-2xl"
+        className="lg:hidden fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl"
       >
         <div className="flex h-full flex-col items-center justify-center gap-8 px-6">
           <ul className="flex flex-col items-center gap-6">

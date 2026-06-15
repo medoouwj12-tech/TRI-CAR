@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>الحسام لإيجار السيارات - نظام وسياسة التعاقد</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #d4a017;
+    --primary-dark: #b8860b;
+    --bg: #0f0f10;
+    --card: #1a1a1c;
+    --card-border: #2a2a2c;
+    --text: #e8e8e8;
+    --muted: #9a9a9a;
+    --accent: #f5c542;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(212, 160, 23, 0.08), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(212, 160, 23, 0.05), transparent 40%);
+    background-attachment: fixed;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, var(--card) 0%, #1f1f22 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  }
+  .logo-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin: 0 auto 16px;
+    box-shadow: 0 0 25px rgba(212, 160, 23, 0.5), inset 0 -3px 8px rgba(0,0,0,0.2);
+    font-family: 'Cairo', sans-serif;
+  }
+  .brand {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 30px rgba(212, 160, 23, 0.3);
+  }
+  .brand-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    direction: ltr;
+  }
+  .phone {
+    display: inline-block;
+    background: rgba(212, 160, 23, 0.1);
+    color: var(--accent);
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    direction: ltr;
+    border: 1px solid rgba(212, 160, 23, 0.3);
+  }
+
+  /* Title */
+  .doc-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 30px 0 40px;
+    padding: 18px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-right: 4px solid var(--primary);
+    border-radius: 10px;
+  }
+
+  /* Sections */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .section:hover {
+    border-color: rgba(212, 160, 23, 0.4);
+    transform: translateY(-2px);
+  }
+  .section-header {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.12), rgba(212, 160, 23, 0.04));
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-number {
+    background: var(--primary);
+    color: #000;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .section-body {
+    padding: 22px 24px;
+  }
+  .section-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .section-body li {
+    position: relative;
+    padding: 10px 0 10px 28px;
+    line-height: 1.9;
+    color: var(--text);
+    border-bottom: 1px dashed rgba(255,255,255,0.05);
+  }
+  .section-body li:last-child { border-bottom: none; }
+  .section-body li::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 22px;
+    width: 8px; height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(212, 160, 23, 0.6);
+  }
+  .section-body li .li-num {
+    color: var(--primary);
+    font-weight: 700;
+    margin-left: 6px;
+  }
+  .section-body p {
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .highlight {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px 20px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+  }
+  .footer-greeting {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+  }
+  .footer-brand {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .footer-signature {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--card-border);
+    color: var(--text);
+    font-size: 1.05rem;
+  }
+  .footer-signature .name {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; color: black; }
+    .section, .header, .doc-title, .footer {
+      background: white;
+      border: 1px solid #ddd;
+      color: black;
+    }
+    .brand, .section-title, .highlight, .footer-brand, .footer-signature .name { color: #b8860b; }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .brand { font-size: 1.8rem; }
+    .doc-title { font-size: 1.2rem; }
+    .section-title { font-size: 1.05rem; }
+    .section-body { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-circle">ح</div>
+      <div class="brand">الحسام لإيجار السيارات</div>
+      <div class="brand-sub">ALHOSSAM CAR RENTAL</div>
+      <div class="phone">📞 ٠١١٢٣٣١١٠٠٠</div>
+    </header>
+
+    <!-- Title -->
+    <h1 class="doc-title">نظام وسياسة التعاقد على إيجار سيارة</h1>
+
+    <!-- Section 1 -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">١</div>
+        <div class="section-title">المستندات المطلوبة</div>
+      </div>
+      <div class="section-body">
+        <ul>
+          <li><span class="li-num">١-</span>بطاقة رقم قومي سارية / أصل جواز سفر ساري بالنسبة للأجانب.</li>
+          <li><span class="li-num">٢-</span>رخصة قيادة سارية ( محلية أو دولية ).</li>
+          <li><span class="li-num">٣-</span>إيصال مرافق حديث يثبت محل الإقامة أو عقد إيجار موثق أو عقد التمليك ( صورة ).</li>
+          <li><span class="li-num">٤-</span>لا يتم التعامل مع من هم دون السن القانوني ( <span class="highlight">٢١ سنة</span> ).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">٢</div>
+        <div class="section-title">خطوات تسليم السيارة</div>
+      </div>
+      <div class="section-body">
+        <ul>
+          <li><span class="li-num">١-</span>معاينة السيارة محل التعاقد وإستلام المفتاح والرخصة الخاصين بالسيارة وكذلك التأكد من وجود الأستبن بحالة جيدة والكوريك ومفتاح العجل وطفاية الحريق.</li>
+          <li><span class="li-num">٢-</span>يتم تصوير السيارة فيديو وقت الاستلام ومراجعة منسوب الماء والزيت.</li>
+          <li><span class="li-num">٣-</span>تجربة السيارة من قبل العميل.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">٣</div>
+        <div class="section-title">نظام الوقت والمسافة</div>
+      </div>
+      <div class="section-body">
+        <ul>
+          <li><span class="li-num">١-</span>ينتهي اليوم الأول الساعة الثانية عشر مساءاً أياً كانت ساعة الاستلام ويبدأ اليوم الثاني من الساعة الثانية عشر مساءاً وينتهي في الثانية عشر مساء اليوم التالي وهكذا.</li>
+          <li><span class="li-num">٢-</span>يحق للمستأجر قطع مسافة <span class="highlight">١٠٠ كم فقط مائة كيلو متر</span> في اليوم الواحد وما يزيد عن ذلك يتم احتساب الكيلو متر الواحد بمبلغ <span class="highlight">( ٦ ج / ٨ ج / ١٠ ج )</span> حسب نوع وموديل السيارة.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">٤</div>
+        <div class="section-title">التأمين</div>
+      </div>
+      <div class="section-body">
+        <p>يتم سداد مبلغ <span class="highlight">خمسة آلاف جنية مصري</span> كتأمين عند التعاقد ويضاف أصل الجواز بالنسبة للأجنبي ويرد عند انقضاء المدة المتفق عليها على أن تكون السيارة بنفس حالة الاستلام ( البنزين / الحالة من الخارج والداخل / غسيل السيارة ).</p>
+      </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">٥</div>
+        <div class="section-title">المخالفات</div>
+      </div>
+      <div class="section-body">
+        <p>يوقع المستأجر على إقرار بمسئوليته عن أي مخالفات تحدث خلال الفترة المؤجرة ويلتزم بسدادها وقت الطلب.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-greeting">مع تحيات أسرة <span class="footer-brand">الحسام</span> لإيجار السيارات</p>
+      <p class="footer-signature">مهندس / <span class="name">حسام الشامي</span></p>
+    </footer>
+
+  </div>
+</body>
+</html>

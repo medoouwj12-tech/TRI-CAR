@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[100svh] w-full overflow-hidden bg-ink-900"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-black"
       aria-label="Hero"
     >
       {/* Layered backgrounds */}
@@ -49,9 +49,9 @@ export function Hero() {
             backgroundImage: "url('/images/hero-banner.png')",
           }}
         />
-        {/* Gradients to merge background image cleanly with web colors and text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-900/90 via-ink-900/70 to-ink-900/50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-900/20 via-transparent to-ink-900" />
+        {/* Light overlay for text readability – keeps the background image clearly visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/15" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60" />
         {/* Radial gold glow */}
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-35"

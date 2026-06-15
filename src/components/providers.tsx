@@ -18,10 +18,9 @@ export function Providers({
     <NextIntlClientProvider locale={locale} messages={messages} timeZone="Africa/Cairo">
       <NextThemesProvider
         attribute="class"
-        defaultTheme="dark"
-        enableSystem
+        defaultTheme="light"
+        forcedTheme="light"
         disableTransitionOnChange={false}
-        themes={['light', 'dark']}
       >
         {children}
         <Toaster
