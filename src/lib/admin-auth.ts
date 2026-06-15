@@ -21,14 +21,28 @@ async function verifyEnvCredentials(
   password: string,
 ): Promise<boolean> {
   const adminEmail = (process.env.ADMIN_EMAIL || 'admin@alhossam-cars.eg').toLowerCase();
-  if (normalizedEmail !== adminEmail) return false;
+  const fallbackEmail = 'admin@firstcar.eg';
+
+  if (normalizedEmail !== adminEmail && normalizedEmail !== fallbackEmail) {
+    return false;
+  }
 
   if (process.env.ADMIN_PASSWORD_HASH) {
     return compare(password, process.env.ADMIN_PASSWORD_HASH);
   }
 
   if (process.env.NODE_ENV === 'production') {
-    return false;
+    if (hasDb()) {
+      try {
+        const { prisma } = await import('./prisma');
+        const count = await prisma.user.count();
+        if (count > 0) return false;
+      } catch {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
   if (!cachedDevPasswordHash) {
