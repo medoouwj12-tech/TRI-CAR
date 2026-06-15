@@ -31,17 +31,13 @@ async function verifyEnvCredentials(
     return compare(password, process.env.ADMIN_PASSWORD_HASH);
   }
 
-  if (process.env.NODE_ENV === 'production') {
-    if (hasDb()) {
-      try {
-        const { prisma } = await import('./prisma');
-        const count = await prisma.user.count();
-        if (count > 0) return false;
-      } catch {
-        return false;
-      }
-    } else {
-      return false;
+  if (process.env.NODE_ENV === 'production' && hasDb()) {
+    try {
+      const { prisma } = await import('./prisma');
+      const count = await prisma.user.count();
+      if (count > 0) return false;
+    } catch {
+      // DB connection failed — allow fallback credentials
     }
   }
 
