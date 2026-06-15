@@ -34,13 +34,13 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[100svh] w-full overflow-hidden bg-black"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-background"
       aria-label="Hero"
     >
       {/* Layered backgrounds */}
       <motion.div
         style={{ y: yBg, scale: scaleFade }}
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 z-0"
       >
         {/* Background Image */}
         <div
@@ -49,15 +49,15 @@ export function Hero() {
             backgroundImage: "url('/images/hero-banner.png')",
           }}
         />
-        {/* Light overlay for text readability – keeps the background image clearly visible */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/15" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60" />
+        {/* Light white overlay for premium look & text readability on light mode */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40 rtl:bg-gradient-to-l" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/50" />
         {/* Radial gold glow */}
         <div
-          className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-35"
+          className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-25"
           style={{
             background:
-              'radial-gradient(closest-side, rgba(212,175,55,0.35), transparent 70%)',
+              'radial-gradient(closest-side, rgba(212,175,55,0.2), transparent 70%)',
             filter: 'blur(20px)',
           }}
         />
@@ -68,10 +68,10 @@ export function Hero() {
       {/* Decorative grid lines */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 opacity-[0.07]"
+        className="absolute inset-0 z-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(212,175,55,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.5) 1px, transparent 1px)',
+            'linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)',
           backgroundSize: '64px 64px',
           maskImage:
             'radial-gradient(ellipse at center, black 30%, transparent 75%)',
@@ -82,7 +82,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: yCar, opacity: opacityFade }}
-        className="container relative pt-32 sm:pt-36 lg:pt-40 pb-10"
+        className="container relative z-10 pt-32 sm:pt-36 lg:pt-40 pb-10"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Copy */}
@@ -234,7 +234,7 @@ function SearchForm() {
       className={cn(
         'group relative overflow-hidden rounded-3xl',
         'border border-gold-400/25 shadow-gold',
-        'glass dark:glass',
+        'glass-light',
       )}
     >
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-gold-400/[0.04] via-transparent to-gold-400/[0.06]" />
@@ -262,7 +262,7 @@ function SearchForm() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full bg-transparent text-sm text-foreground/90 focus:outline-none [color-scheme:dark]"
+            className="w-full bg-transparent text-sm text-foreground/90 focus:outline-none [color-scheme:light]"
           />
         </Field>
         <button
