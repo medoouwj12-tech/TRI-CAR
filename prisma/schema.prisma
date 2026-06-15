@@ -35,6 +35,8 @@ model Car {
   category     Category
   pricePerDay  Decimal  @db.Decimal(10, 2)
   pricePerHour Decimal? @db.Decimal(10, 2)
+  pricePerWeek Decimal  @db.Decimal(10, 2) @default(0)
+  pricePerMonth Decimal @db.Decimal(10, 2) @default(0)
   imageUrl     String
   gallery      String[] // additional image URLs
   withDriver   Boolean  @default(false)

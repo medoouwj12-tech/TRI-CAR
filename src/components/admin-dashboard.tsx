@@ -646,7 +646,13 @@ function CarFormModal({
     setSaving(true);
     const body = {
       ...form,
-      features: featuresStr.split(',').map((s) => s.trim()).filter(Boolean),
+      pricePerWeek: Number(form.pricePerWeek) || 0,
+      pricePerMonth: Number(form.pricePerMonth) || 0,
+      features: [],
+      seats: 4,
+      transmission: 'AUTOMATIC',
+      fuelType: 'GASOLINE',
+      withDriver: false,
     };
     const url = car ? `/api/admin/cars/${car.id}` : '/api/admin/cars';
     const method = car ? 'PUT' : 'POST';
@@ -668,7 +674,7 @@ function CarFormModal({
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-gold-gradient">
-            {car ? t('editCar') : t('addCar')}
+            {car ? 'تعديل سيارة' : 'إضافة سيارة جديدة'}
           </h2>
           <button onClick={onClose} className="rounded-full p-1 hover:bg-gold-400/10">
             <X className="h-4 w-4" />
@@ -676,31 +682,37 @@ function CarFormModal({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Inp label="Make" value={String(form.make ?? '')} onChange={(v) => set('make', v)} />
-          <Inp label="Model" value={String(form.model ?? '')} onChange={(v) => set('model', v)} />
-          <Inp label="Year" type="number" value={String(form.year ?? '')} onChange={(v) => set('year', Number(v))} />
+          <Inp label="الماركة (مثال: Mercedes-Benz)" value={String(form.make ?? '')} onChange={(v) => set('make', v)} />
+          <Inp label="الموديل (مثال: S-Class)" value={String(form.model ?? '')} onChange={(v) => set('model', v)} />
+          <Inp label="السنة (مثال: 2024)" type="number" value={String(form.year ?? '')} onChange={(v) => set('year', Number(v))} />
           <Sel
-            label="Category"
-            value={String(form.category)}
+            label="الفئة"
+            value={String(form.category ?? 'LUXURY')}
             onChange={(v) => set('category', v as any)}
             options={['SEDAN', 'SUV', 'LUXURY', 'SPORTS', 'VAN', 'ELECTRIC']}
           />
           <Inp
-            label="Price / day"
+            label="سعر الإيجار اليومي"
             type="number"
             value={String(form.pricePerDay ?? '')}
             onChange={(v) => set('pricePerDay', Number(v))}
           />
           <Inp
-            label="Seats"
+            label="سعر الإيجار الأسبوعي"
             type="number"
-            value={String(form.seats ?? '')}
-            onChange={(v) => set('seats', Number(v))}
+            value={String(form.pricePerWeek ?? '')}
+            onChange={(v) => set('pricePerWeek', Number(v))}
+          />
+          <Inp
+            label="سعر الإيجار الشهري"
+            type="number"
+            value={String(form.pricePerMonth ?? '')}
+            onChange={(v) => set('pricePerMonth', Number(v))}
           />
 
           {/* Main Image Upload Zone */}
           <div className="sm:col-span-2 space-y-2">
-            <span className="text-[10px] uppercase tracking-widest text-foreground/50">{t('uploadImage')}</span>
+            <span className="text-[10px] uppercase tracking-widest text-foreground/50">الصورة الرئيسية للسيارة</span>
             <div className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl border border-gold-400/20 bg-background/40">
               {form.imageUrl ? (
                 <div className="relative h-24 w-36 rounded-xl overflow-hidden border border-gold-400/30 shrink-0">
@@ -720,7 +732,7 @@ function CarFormModal({
               )}
               <div className="flex-1 w-full text-center sm:text-left">
                 <label className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gold-gradient text-ink-900 font-bold text-xs cursor-pointer shadow-gold hover:shadow-gold-lg transition-all">
-                  {uploading ? t('uploading') : t('uploadImage')}
+                  {uploading ? 'جاري الرفع...' : 'رفع صورة من الجهاز'}
                   <input
                     type="file"
                     accept="image/*"
@@ -729,16 +741,16 @@ function CarFormModal({
                     disabled={uploading}
                   />
                 </label>
-                <p className="text-[10px] text-foreground/40 mt-1">{t('dragDropImage')}</p>
+                <p className="text-[10px] text-foreground/40 mt-1">اضغط للرفع وسيتم ضغطها تلقائياً</p>
               </div>
             </div>
             {/* Fallback URL input */}
-            <Inp label="Or Paste Image URL" value={String(form.imageUrl ?? '')} onChange={(v) => set('imageUrl', v)} />
+            <Inp label="أو الصق رابط مباشر للصورة" value={String(form.imageUrl ?? '')} onChange={(v) => set('imageUrl', v)} />
           </div>
 
           {/* Gallery Upload Grid */}
           <div className="sm:col-span-2 space-y-2">
-            <span className="text-[10px] uppercase tracking-widest text-foreground/50">{t('uploadGallery')}</span>
+            <span className="text-[10px] uppercase tracking-widest text-foreground/50">صور إضافية للمعرض (اختياري)</span>
             <div className="p-4 rounded-2xl border border-gold-400/20 bg-background/40 space-y-3">
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                 {(form.gallery || []).map((url, index) => (
@@ -758,7 +770,7 @@ function CarFormModal({
                 ))}
                 <label className="h-16 rounded-lg border-2 border-dashed border-gold-400/30 hover:border-gold-400/60 flex flex-col items-center justify-center cursor-pointer text-foreground/40 transition-all">
                   <Plus className="h-5 w-5" />
-                  <span className="text-[8px] font-bold mt-1">Add Image</span>
+                  <span className="text-[8px] font-bold mt-1">إضافة صورة</span>
                   <input
                     type="file"
                     multiple
@@ -772,35 +784,11 @@ function CarFormModal({
             </div>
           </div>
 
-          <Inp
-            label="Features (comma separated)"
-            value={featuresStr}
-            onChange={setFeaturesStr}
-            className="sm:col-span-2"
-          />
-          <Sel
-            label="Transmission"
-            value={String(form.transmission)}
-            onChange={(v) => set('transmission', v as any)}
-            options={['AUTOMATIC', 'MANUAL']}
-          />
-          <Sel
-            label="Fuel"
-            value={String(form.fuelType)}
-            onChange={(v) => set('fuelType', v as any)}
-            options={['GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC']}
-          />
+          <div className="sm:col-span-2 space-y-2">
+            <Inp label="الوصف والتفاصيل الإضافية (اختياري)" value={String(form.description ?? '')} onChange={(v) => set('description', v)} />
+          </div>
           
           <div className="flex flex-wrap gap-4 sm:col-span-2 mt-2">
-            <label className="flex items-center gap-2 text-sm text-foreground/80 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={!!form.withDriver}
-                onChange={(e) => set('withDriver', e.target.checked)}
-                className="accent-gold-400"
-              />
-              With driver
-            </label>
             <label className="flex items-center gap-2 text-sm text-foreground/80 cursor-pointer">
               <input
                 type="checkbox"
@@ -808,7 +796,7 @@ function CarFormModal({
                 onChange={(e) => set('isAvailable', e.target.checked)}
                 className="accent-gold-400"
               />
-              Available
+              متاحة للإيجار
             </label>
             <label className="flex items-center gap-2 text-sm text-foreground/80 cursor-pointer">
               <input
@@ -817,7 +805,7 @@ function CarFormModal({
                 onChange={(e) => set('featured', e.target.checked)}
                 className="accent-gold-400"
               />
-              Featured
+              عرض في الصفحة الرئيسية (مميزة)
             </label>
           </div>
         </div>
@@ -827,14 +815,14 @@ function CarFormModal({
             onClick={onClose}
             className="rounded-full border border-gold-400/30 px-5 py-2 text-sm font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
           >
-            Cancel
+            إلغاء
           </button>
           <button
             onClick={save}
             disabled={saving || uploading}
             className="rounded-full bg-gold-gradient text-ink-900 px-6 py-2 text-sm font-bold shadow-gold hover:shadow-gold-lg transition-all disabled:opacity-60"
           >
-            {saving ? 'Saving…' : 'Save'}
+            {saving ? 'جاري الحفظ...' : 'حفظ السيارة'}
           </button>
         </div>
       </motion.div>
@@ -862,7 +850,7 @@ function Inp({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-xl border border-gold-400/20 bg-background/40 px-3 py-2 text-sm focus:outline-none focus:border-gold-400/60"
+        className="mt-1 w-full rounded-xl border border-gold-400/20 bg-background/40 px-3 py-2 text-sm focus:outline-none focus:border-gold-400/60 text-foreground"
       />
     </label>
   );

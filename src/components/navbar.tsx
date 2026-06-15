@@ -92,7 +92,6 @@ export function Navbar() {
             </ul>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <LanguageToggle />
               <ThemeToggle />
               <Link
                 href="/#booking"

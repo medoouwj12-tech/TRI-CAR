@@ -49,6 +49,8 @@ function toCar(row: any): Car {
     category: row.category,
     pricePerDay: Number(row.pricePerDay),
     pricePerHour: row.pricePerHour ? Number(row.pricePerHour) : null,
+    pricePerWeek: row.pricePerWeek ? Number(row.pricePerWeek) : 0,
+    pricePerMonth: row.pricePerMonth ? Number(row.pricePerMonth) : 0,
     imageUrl: row.imageUrl,
     gallery: row.gallery ?? [],
     withDriver: row.withDriver,

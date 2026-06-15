@@ -38,13 +38,7 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
         </div>
       )}
 
-      {/* With driver tag */}
-      {car.withDriver && (
-        <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 rounded-full glass-light dark:glass border border-gold-400/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-200">
-          <Star className="h-3 w-3 text-gold-300 fill-gold-300" />
-          {t('filters.withDriver')}
-        </div>
-      )}
+
 
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden bg-ink-700">
@@ -85,27 +79,31 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
           </div>
         </div>
 
-        {/* Specs */}
-        <div className="grid grid-cols-3 gap-2 my-4">
-          <Spec icon={Users} label={`${car.seats} ${t('seats')}`} />
-          <Spec icon={Settings2} label={t(`transmission.${car.transmission}`)} />
-          <Spec icon={Fuel} label={t(`fuel.${car.fuelType}`)} />
+        {/* Prices List */}
+        <div className="space-y-2 my-4 text-xs">
+          <div className="flex justify-between border-b border-gold-400/5 pb-1.5">
+            <span className="text-foreground/60">إيجار يومي:</span>
+            <span className="font-extrabold text-gold-200">{formatCurrency(car.pricePerDay, locale)}</span>
+          </div>
+          <div className="flex justify-between border-b border-gold-400/5 pb-1.5">
+            <span className="text-foreground/60">إيجار أسبوعي:</span>
+            <span className="font-extrabold text-gold-200">
+              {car.pricePerWeek > 0 ? formatCurrency(car.pricePerWeek, locale) : '—'}
+            </span>
+          </div>
+          <div className="flex justify-between pb-1">
+            <span className="text-foreground/60">إيجار شهري:</span>
+            <span className="font-extrabold text-gold-200">
+              {car.pricePerMonth > 0 ? formatCurrency(car.pricePerMonth, locale) : '—'}
+            </span>
+          </div>
         </div>
 
-        {/* Price + CTA */}
-        <div className="flex items-end justify-between gap-3 pt-4 border-t border-gold-400/10">
-          <div>
-            <p className="text-[10px] uppercase tracking-widest text-foreground/50">
-              {tDetails('from')}
-            </p>
-            <p className="text-2xl font-extrabold text-gold-gradient">
-              {formatCurrency(car.pricePerDay, locale)}
-              <span className="text-xs font-normal text-foreground/50"> / {t('perDay')}</span>
-            </p>
-          </div>
+        {/* CTA */}
+        <div className="pt-4 border-t border-gold-400/10 flex justify-end">
           <IntlLink
             href={href}
-            className="inline-flex items-center gap-1.5 rounded-full bg-gold-gradient text-ink-900 px-4 py-2 text-xs font-bold shadow-gold hover:shadow-gold-lg transition-all hover:scale-105 active:scale-95"
+            className="inline-flex items-center gap-1.5 rounded-full bg-gold-gradient text-ink-900 px-5 py-2 text-xs font-bold shadow-gold hover:shadow-gold-lg transition-all hover:scale-105 active:scale-95"
           >
             {t('book')}
           </IntlLink>

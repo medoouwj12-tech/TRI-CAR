@@ -10,6 +10,8 @@ export interface Car {
   category: Category;
   pricePerDay: number;
   pricePerHour?: number | null;
+  pricePerWeek: number;
+  pricePerMonth: number;
   imageUrl: string;
   gallery: string[];
   withDriver: boolean;

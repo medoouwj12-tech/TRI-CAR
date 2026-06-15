@@ -71,18 +71,16 @@ export function BookingForm({ car }: { car: Car }) {
   const submit = async () => {
     setSubmitting(true);
 
-    // Build WhatsApp message in the exact requested format
+    // Build WhatsApp message
     const message =
       `مرحباً، أرغب في حجز سيارة من الحسام للسيارات.\n` +
       `الاسم: ${data.name}\n` +
       `العربية: ${car.make} ${car.model}\n` +
-      `عدد الركاب: ${data.passengers}\n` +
       `من: ${data.pickupLocation}\n` +
       `إلى: ${data.dropoffLocation}\n` +
       `التاريخ: ${data.date}${data.time ? ' ' + data.time : ''}` +
       (data.notes ? `\nملاحظات: ${data.notes}` : '');
 
-    // Try to persist to DB (best-effort, won't break UX if it fails)
     try {
       await fetch('/api/bookings', {
         method: 'POST',
@@ -95,7 +93,7 @@ export function BookingForm({ car }: { car: Car }) {
           pickupLocation: data.pickupLocation,
           dropoffLocation: data.dropoffLocation,
           date: data.date,
-          passengers: data.passengers,
+          passengers: 1,
           notes: data.notes || null,
         }),
       });
@@ -160,8 +158,8 @@ export function BookingForm({ car }: { car: Car }) {
                 <p className="text-sm font-bold truncate">
                   {car.make} {car.model}
                 </p>
-                <p className="text-xs text-foreground/50">
-                  {car.year} · {car.seats} {tFleet('seats')}
+                 <p className="text-xs text-foreground/50">
+                  {car.year}
                 </p>
               </div>
             </div>
@@ -236,19 +234,6 @@ export function BookingForm({ car }: { car: Car }) {
                   />
                 </Field>
               </div>
-              <Field icon={Users} label={t('fields.passengers')}>
-                <select
-                  value={data.passengers}
-                  onChange={(e) => set('passengers', parseInt(e.target.value, 10))}
-                  className="w-full bg-transparent text-sm focus:outline-none appearance-none cursor-pointer"
-                >
-                  {Array.from({ length: car.seats }).map((_, i) => (
-                    <option key={i + 1} value={i + 1} className="bg-ink-900">
-                      {i + 1}
-                    </option>
-                  ))}
-                </select>
-              </Field>
             </>
           )}
 
@@ -263,7 +248,6 @@ export function BookingForm({ car }: { car: Car }) {
                 k={t('fields.date')}
                 v={`${data.date}${data.time ? ' · ' + data.time : ''}`}
               />
-              <Row k={t('review.passengers')} v={String(data.passengers)} />
             </div>
           )}
         </motion.div>

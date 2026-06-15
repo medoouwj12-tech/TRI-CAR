@@ -38,6 +38,8 @@ export async function POST(req: NextRequest) {
         category: body.category || 'LUXURY',
         pricePerDay: Number(body.pricePerDay) || 0,
         pricePerHour: body.pricePerHour ? Number(body.pricePerHour) : null,
+        pricePerWeek: Number(body.pricePerWeek) || 0,
+        pricePerMonth: Number(body.pricePerMonth) || 0,
         imageUrl: body.imageUrl,
         gallery: body.gallery || [],
         withDriver: Boolean(body.withDriver),

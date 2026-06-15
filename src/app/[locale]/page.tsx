@@ -8,6 +8,8 @@ import { HomeAbout } from '@/components/home-about';
 import { HomePolicy } from '@/components/home-policy';
 import { HomeContact } from '@/components/home-contact';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage({
   params,
 }: {

@@ -22,6 +22,8 @@ export async function PUT(
         category: body.category,
         pricePerDay: body.pricePerDay ? Number(body.pricePerDay) : undefined,
         pricePerHour: body.pricePerHour ? Number(body.pricePerHour) : undefined,
+        pricePerWeek: body.pricePerWeek ? Number(body.pricePerWeek) : undefined,
+        pricePerMonth: body.pricePerMonth ? Number(body.pricePerMonth) : undefined,
         imageUrl: body.imageUrl,
         gallery: body.gallery,
         withDriver: body.withDriver,

@@ -4,7 +4,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
-import { Users, Fuel, Settings2, Star, Sparkles, ArrowRight, Check } from 'lucide-react';
+import { Users, Fuel, Settings2, Star, Sparkles, ArrowRight, Check, Clock, Calendar } from 'lucide-react';
 import { Link as IntlLink } from '@/i18n/routing';
 import { formatCurrency, buildWhatsAppUrl } from '@/lib/utils';
 import type { Car } from '@/lib/cars.types';
@@ -18,7 +18,7 @@ export function CarDetails({ car }: { car: Car }) {
   const [activeImg, setActiveImg] = React.useState(0);
 
   const gallery = car.gallery.length > 0 ? car.gallery : [car.imageUrl];
-  const waMsg = `مرحباً، أرغب في حجز سيارة من الحسام للسيارات.\nالاسم: [الاسم]\nالعربية: ${car.make} ${car.model}\nعدد الركاب: ${car.seats}\nمن: [الاستلام]\nإلى: [الوصول]\nالتاريخ: [التاريخ]`;
+  const waMsg = `مرحباً، أرغب في حجز سيارة من الحسام للسيارات.\nالاسم: [الاسم]\nالعربية: ${car.make} ${car.model}\nمن: [الاستلام]\nإلى: [الوصول]\nالتاريخ: [التاريخ]`;
   const waHref = buildWhatsAppUrl(waMsg);
 
   return (
@@ -98,17 +98,16 @@ export function CarDetails({ car }: { car: Car }) {
             </h1>
           </motion.div>
 
-          {/* Specs grid */}
+          {/* Pricing grid */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-3"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3"
           >
-            <SpecBox icon={Users} label={tFleet('seats')} value={`${car.seats}`} />
-            <SpecBox icon={Settings2} label={tFleet('transmission.AUTOMATIC') === 'أوتوماتيك' ? 'ناقل' : 'Trans'} value={tFleet(`transmission.${car.transmission}`)} />
-            <SpecBox icon={Fuel} label={tFleet('fuel.GASOLINE') === 'بنزين' ? 'الوقود' : 'Fuel'} value={tFleet(`fuel.${car.fuelType}`)} />
-            <SpecBox icon={Star} label={tFleet('filters.withDriver') === 'مع سائق' ? 'السائق' : 'Driver'} value={car.withDriver ? '✓' : '—'} />
+            <SpecBox icon={Clock} label="إيجار يومي" value={formatCurrency(car.pricePerDay, locale)} />
+            <SpecBox icon={Calendar} label="إيجار أسبوعي" value={car.pricePerWeek > 0 ? formatCurrency(car.pricePerWeek, locale) : '—'} />
+            <SpecBox icon={Calendar} label="إيجار شهري" value={car.pricePerMonth > 0 ? formatCurrency(car.pricePerMonth, locale) : '—'} />
           </motion.div>
 
           {/* Description */}
@@ -125,30 +124,6 @@ export function CarDetails({ car }: { car: Car }) {
               <p className="text-foreground/80 leading-relaxed">{car.description}</p>
             </motion.div>
           )}
-
-          {/* Features */}
-          {car.features.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="rounded-2xl border border-gold-400/15 bg-card/50 p-6"
-            >
-              <h2 className="text-sm font-bold uppercase tracking-widest text-gold-300 mb-4">
-                {t('features')}
-              </h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {car.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm">
-                    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gold-400/15 text-gold-300">
-                      <Check className="h-3 w-3" />
-                    </span>
-                    <span className="text-foreground/85">{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
         </div>
 
         {/* Sticky booking panel */}
@@ -160,18 +135,24 @@ export function CarDetails({ car }: { car: Car }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="rounded-3xl border border-gold-400/30 bg-card/80 backdrop-blur-xl p-6 shadow-gold"
             >
-              <p className="text-[10px] uppercase tracking-widest text-foreground/50">
-                {t('from')}
-              </p>
-              <p className="text-4xl font-extrabold text-gold-gradient mt-1">
-                {formatCurrency(car.pricePerDay, locale)}
-                <span className="text-base font-normal text-foreground/50"> / {tFleet('perDay')}</span>
-              </p>
-              {car.pricePerHour && (
-                <p className="text-sm text-foreground/60 mt-1">
-                  {formatCurrency(car.pricePerHour, locale)} / {tFleet('perHour')}
-                </p>
-              )}
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between border-b border-gold-400/10 pb-2">
+                  <span className="text-foreground/60">إيجار يومي:</span>
+                  <span className="font-extrabold text-gold-gradient text-lg">{formatCurrency(car.pricePerDay, locale)}</span>
+                </div>
+                <div className="flex justify-between border-b border-gold-400/10 pb-2">
+                  <span className="text-foreground/60">إيجار أسبوعي:</span>
+                  <span className="font-extrabold text-gold-gradient text-lg">
+                    {car.pricePerWeek > 0 ? formatCurrency(car.pricePerWeek, locale) : '—'}
+                  </span>
+                </div>
+                <div className="flex justify-between pb-1">
+                  <span className="text-foreground/60">إيجار شهري:</span>
+                  <span className="font-extrabold text-gold-gradient text-lg">
+                    {car.pricePerMonth > 0 ? formatCurrency(car.pricePerMonth, locale) : '—'}
+                  </span>
+                </div>
+              </div>
 
               <div className="my-5 border-t border-gold-400/15" />
 
