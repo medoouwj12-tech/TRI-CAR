@@ -109,7 +109,10 @@
       "name": "Name",
       "phone": "Phone",
       "trip": "Trip",
-      "passengers": "Passengers"
+      "passengers": "Passengers",
+      "paymentTitle": "Reservation Deposit Payment",
+      "paymentDesc": "To confirm your reservation, please transfer the deposit via Etisalat Cash or InstaPay to the following number:",
+      "paymentMethods": "Etisalat Cash / InstaPay"
     },
     "success": "Redirecting you to WhatsApp…"
   },

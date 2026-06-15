@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
-import { ArrowRight, Check, Calendar, MapPin, User, Phone, Users, MessageCircle } from 'lucide-react';
+import { ArrowRight, Check, Calendar, MapPin, User, Phone, Users, MessageCircle, CreditCard } from 'lucide-react';
 import { buildWhatsAppUrl } from '@/lib/utils';
 import { loadSearchPrefs } from '@/lib/search-prefs';
 import type { Car } from '@/lib/cars.types';
@@ -238,16 +238,35 @@ export function BookingForm({ car }: { car: Car }) {
           )}
 
           {step === 3 && (
-            <div className="space-y-2 text-sm">
-              <Row k={t('review.car')} v={`${car.make} ${car.model}`} />
-              <Row k={t('review.name')} v={data.name} />
-              <Row k={t('review.phone')} v={data.phone} />
-              <Row k={t('fields.pickup')} v={data.pickupLocation} />
-              <Row k={t('fields.dropoff')} v={data.dropoffLocation} />
-              <Row
-                k={t('fields.date')}
-                v={`${data.date}${data.time ? ' · ' + data.time : ''}`}
-              />
+            <div className="space-y-4 text-sm">
+              <div className="space-y-2">
+                <Row k={t('review.car')} v={`${car.make} ${car.model}`} />
+                <Row k={t('review.name')} v={data.name} />
+                <Row k={t('review.phone')} v={data.phone} />
+                <Row k={t('fields.pickup')} v={data.pickupLocation} />
+                <Row k={t('fields.dropoff')} v={data.dropoffLocation} />
+                <Row
+                  k={t('fields.date')}
+                  v={`${data.date}${data.time ? ' · ' + data.time : ''}`}
+                />
+              </div>
+
+              {/* Payment Info Box */}
+              <div className="rounded-2xl border border-gold-400/25 bg-gold-400/5 p-4 text-xs text-foreground/80 space-y-2.5">
+                <p className="font-bold text-gold-300 flex items-center gap-2">
+                  <CreditCard className="h-4 w-4 shrink-0 text-gold-300" />
+                  <span>{t('review.paymentTitle')}</span>
+                </p>
+                <p className="leading-relaxed text-foreground/70">
+                  {t('review.paymentDesc')}
+                </p>
+                <div className="flex items-center gap-3 mt-2 font-mono text-base font-extrabold text-gold-200 bg-background/50 px-3.5 py-2.5 rounded-xl border border-gold-400/15 justify-between">
+                  <span dir="ltr">01123311000</span>
+                  <span className="text-[10px] bg-gold-400/20 px-2 py-1 rounded-md text-gold-300 font-sans font-semibold shrink-0">
+                    {t('review.paymentMethods')}
+                  </span>
+                </div>
+              </div>
             </div>
           )}
         </motion.div>
