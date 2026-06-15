@@ -13,7 +13,7 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "admin:hash": "ts-node --compiler-options {\"module\":\"commonjs\"} scripts/hash-password.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "node scripts/postinstall.js"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} prisma/seed.ts"
