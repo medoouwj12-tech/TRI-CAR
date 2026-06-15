@@ -8,11 +8,6 @@ import { hash } from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-  // Clear existing seed cars so the admin starts fresh
-  console.log('🧹 Clearing existing cars...');
-  await prisma.car.deleteMany({});
-  console.log('✓ Cars cleared');
-
   console.log('👤 Seeding admin user...');
   const email = process.env.ADMIN_EMAIL || 'admin@firstcar.eg';
   const plainPassword = process.env.ADMIN_PASSWORD || 'admin123';
