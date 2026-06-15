@@ -8,8 +8,10 @@ function getSessionSecret(): string {
   if (secret && secret.length >= 32) return secret;
 
   if (process.env.NODE_ENV === 'production') {
-    throw new Error(
-      'SESSION_SECRET must be set in production (min 32 characters).',
+    // No SESSION_SECRET in production — use a per-instance fallback.
+    // Sessions won't persist across redeploys but login will work.
+    console.warn(
+      '⚠️ SESSION_SECRET is not set. Using a temporary random secret. Set SESSION_SECRET (min 32 chars) for persistent sessions.',
     );
   }
 
