@@ -64,9 +64,15 @@ export function Footer() {
               <a href="mailto:booking@alhossam-cars.eg" className="flex items-center gap-2 hover:text-gold-300 transition-colors">
                 <Mail className="h-4 w-4 text-gold-400" /> booking@alhossam-cars.eg
               </a>
-              <span className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-gold-400" /> Cairo, Egypt
-              </span>
+              <a
+                href="https://maps.google.com/?q=29XJ%2BHWP%2C+Al+Hay+Al+Asher%2C+Nasr+City%2C+Cairo+Governorate+4444102"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-gold-300 transition-colors"
+              >
+                <MapPin className="h-4 w-4 text-gold-400 shrink-0" />
+                <span>{t('addressValue')}</span>
+              </a>
             </div>
           </div>
 

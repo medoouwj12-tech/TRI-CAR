@@ -156,7 +156,8 @@
     "rights": "All rights reserved",
     "company": "Company",
     "support": "Support",
-    "followUs": "Follow us"
+    "followUs": "Follow us",
+    "addressValue": "Nasr City, Cairo (29XJ+HWP)"
   },
   "home": {
     "fleet": {
@@ -224,7 +225,7 @@
         "phone": "Phone",
         "email": "Email",
         "address": "Head office",
-        "addressValue": "New Cairo, Egypt"
+        "addressValue": "Al Hay Al Asher, Nasr City, Cairo (29XJ+HWP)"
       }
     },
     "policy": {

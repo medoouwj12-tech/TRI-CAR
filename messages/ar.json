@@ -156,7 +156,8 @@
     "rights": "جميع الحقوق محفوظة",
     "company": "الشركة",
     "support": "الدعم",
-    "followUs": "تابعنا"
+    "followUs": "تابعنا",
+    "addressValue": "مدينة نصر، القاهرة (29XJ+HWP)"
   },
   "home": {
     "fleet": {
@@ -224,7 +225,7 @@
         "phone": "الهاتف",
         "email": "البريد",
         "address": "المقر الرئيسي",
-        "addressValue": "القاهرة الجديدة، مصر"
+        "addressValue": "الحي العاشر، مدينة نصر، القاهرة (29XJ+HWP)"
       }
     },
     "policy": {

@@ -58,7 +58,7 @@ export function HomeContact() {
           >
             <ContactItem icon={Phone} label={t('info.phone')} value="+20 112 331 1000" href="tel:+201123311000" />
             <ContactItem icon={Mail} label={t('info.email')} value="info@alhossam-cars.eg" href="mailto:info@alhossam-cars.eg" />
-            <ContactItem icon={MapPin} label={t('info.address')} value={t('info.addressValue')} />
+            <ContactItem icon={MapPin} label={t('info.address')} value={t('info.addressValue')} href="https://maps.google.com/?q=29XJ%2BHWP%2C+Al+Hay+Al+Asher%2C+Nasr+City%2C+Cairo+Governorate+4444102" />
             <a
               href={buildWhatsAppUrl(t('whatsappDefault'))}
               target="_blank"
@@ -132,8 +132,13 @@ function ContactItem({
   );
 
   if (href) {
+    const isExternal = href.startsWith('http');
     return (
-      <a href={href} className="block hover:opacity-90 transition-opacity">
+      <a
+        href={href}
+        className="block hover:opacity-90 transition-opacity"
+        {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
         {inner}
       </a>
     );
