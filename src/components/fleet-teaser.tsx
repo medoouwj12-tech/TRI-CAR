@@ -1,14 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { CarCard } from '@/components/car-card';
-import { getFeaturedCars } from '@/lib/cars';
+import { getCars } from '@/lib/cars';
 import { ArrowRight } from 'lucide-react';
 
 export async function FleetTeaser({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'fleet' });
   const tHome = await getTranslations({ locale, namespace: 'home.fleet' });
-  const cars = await getFeaturedCars();
-  const preview = cars.slice(0, 3);
+  const cars = await getCars();
 
   return (
     <section
@@ -25,9 +24,9 @@ export async function FleetTeaser({ locale }: { locale: string }) {
         <p className="mt-4 text-foreground/60">{t('subtitle')}</p>
       </div>
 
-      {preview.length > 0 ? (
+      {cars.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {preview.map((car, i) => (
+          {cars.map((car, i) => (
             <CarCard key={car.id} car={car} index={i} />
           ))}
         </div>
