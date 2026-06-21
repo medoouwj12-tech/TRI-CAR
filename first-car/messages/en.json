@@ -7,10 +7,10 @@
     "book": "Book Now"
   },
   "hero": {
-    "badge": "Luxury Car Rental • Egypt",
+    "badge": "Car Rental • Egypt",
     "title": "El Hosam Car Rental",
     "titleHighlight": "01123311000",
-    "subtitle": "A fleet of the most prestigious cars, professional chauffeurs, and 24/7 VIP service — because your trip deserves nothing less.",
+    "subtitle": "A varied fleet, professional chauffeurs, and 24/7 service — because your trip deserves dependable care.",
     "search": {
       "pickup": "Pickup location",
       "dropoff": "Drop-off location",
@@ -19,19 +19,19 @@
       "cta": "Find a car"
     },
     "stats": {
-      "cars": "Luxury Cars",
+      "cars": "Cars",
       "trips": "Trips / Year",
       "rating": "Client Rating",
       "support": "24/7 Support"
     }
   },
   "fleet": {
-    "title": "The Prestige Fleet",
-    "subtitle": "Choose from the most luxurious cars in Egypt",
+    "title": "The Fleet",
+    "subtitle": "Choose from our cars in Egypt",
     "viewAll": "View all cars"
   },
   "footer": {
-    "tagline": "A luxury driving experience, starting here.",
+    "tagline": "A comfortable driving experience, starting here.",
     "rights": "All rights reserved",
     "company": "Company",
     "support": "Support",

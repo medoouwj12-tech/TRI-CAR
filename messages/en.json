@@ -8,10 +8,10 @@
     "book": "Book Now"
   },
   "hero": {
-    "badge": "Luxury Car Rental • Egypt",
+    "badge": "Car Rental • Egypt",
     "title": "El Hosam Car Rental",
     "titleHighlight": "01123311000",
-    "subtitle": "A fleet of the most prestigious cars, professional chauffeurs, and 24/7 VIP service — because your trip deserves nothing less.",
+    "subtitle": "A varied fleet, professional chauffeurs, and 24/7 service — because your trip deserves dependable care.",
     "search": {
       "pickup": "Pickup location",
       "dropoff": "Drop-off location",
@@ -25,15 +25,15 @@
     },
     "explore": "Explore",
     "stats": {
-      "cars": "Luxury Cars",
+      "cars": "Cars",
       "trips": "Trips / Year",
       "rating": "Client Rating",
       "support": "24/7 Support"
     }
   },
   "fleet": {
-    "title": "The Prestige Fleet",
-    "subtitle": "Choose from the most luxurious cars in Egypt",
+    "title": "The Fleet",
+    "subtitle": "Choose from our cars in Egypt",
     "viewAll": "View all cars",
     "filters": {
       "all": "All",
@@ -47,7 +47,7 @@
     "categories": {
       "SEDAN": "Sedan",
       "SUV": "SUV",
-      "LUXURY": "Luxury",
+      "LUXURY": "Special",
       "SPORTS": "Sports",
       "VAN": "Van",
       "ELECTRIC": "Electric"
@@ -155,7 +155,7 @@
     }
   },
   "footer": {
-    "tagline": "A luxury driving experience, starting here.",
+    "tagline": "A comfortable driving experience, starting here.",
     "rights": "All rights reserved",
     "company": "Company",
     "support": "Support",
@@ -169,15 +169,15 @@
     },
     "services": {
       "eyebrow": "Services",
-      "title": "Everything you need for a premium trip",
-      "subtitle": "From airport pickup to multi-day VIP tours — we handle every detail.",
+      "title": "Everything you need for a smooth trip",
+      "subtitle": "From airport pickup to multi-day tours — we handle every detail.",
       "items": {
         "chauffeur": {
           "title": "Professional chauffeurs",
           "desc": "Trained, discreet drivers for business and leisure travel across Egypt."
         },
         "fleet": {
-          "title": "Premium fleet",
+          "title": "Car fleet",
           "desc": "Mercedes, BMW, Range Rover and more — maintained to showroom standards."
         },
         "availability": {
@@ -189,7 +189,7 @@
           "desc": "Custom itineraries, multi-stop routes, and special event logistics."
         },
         "vip": {
-          "title": "VIP experience",
+          "title": "Comfortable experience",
           "desc": "Complimentary water, Wi-Fi, and a spotless cabin every trip."
         },
         "coverage": {
@@ -200,8 +200,8 @@
     },
     "about": {
       "eyebrow": "About Al-Hossam Cars",
-      "title": "Luxury mobility, built on trust",
-      "p1": "Al-Hossam Cars was founded to bring world-class chauffeur and self-drive services to Egypt's most discerning travelers. We combine a curated fleet with white-glove service at every touchpoint.",
+      "title": "Comfortable mobility, built on trust",
+      "p1": "Al-Hossam Cars was founded to bring reliable chauffeur and self-drive services to travelers in Egypt. We combine a curated fleet with attentive service at every touchpoint.",
       "p2": "Whether you need an airport transfer, a wedding motorcade, or a week-long executive rental — our team delivers punctuality, discretion, and comfort without compromise.",
       "stats": {
         "experience": { "value": "8+", "label": "Years of experience" },
@@ -216,7 +216,7 @@
       "subtitle": "Reach us on WhatsApp, phone, or email — we typically reply within minutes.",
       "whatsappCta": "Chat on WhatsApp",
       "whatsappIntro": "Hello, I would like to inquire about Al-Hossam Cars services.",
-      "whatsappDefault": "Hello, I would like to book a luxury car with Al-Hossam Cars.",
+      "whatsappDefault": "Hello, I would like to book a car with Al-Hossam Cars.",
       "submit": "Send via WhatsApp",
       "sent": "Opening WhatsApp…",
       "fields": {
