@@ -7,6 +7,7 @@ import { Menu, X, Phone } from 'lucide-react';
 import { Logo } from './logo';
 
 import { LanguageToggle } from './language-toggle';
+import { ThemeToggle } from './theme-toggle';
 import { Link, usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
@@ -92,6 +93,8 @@ export function Navbar() {
             </ul>
 
             <div className="flex items-center gap-2 sm:gap-3">
+              <ThemeToggle />
+              <LanguageToggle />
 
               <Link
                 href="/#booking"
@@ -131,7 +134,7 @@ export function Navbar() {
             : 'inset(0% 0% 100% 0%)',
         }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="lg:hidden fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl"
+        className="lg:hidden fixed inset-0 z-40 bg-background/98 backdrop-blur-2xl"
       >
         <div className="flex h-full flex-col items-center justify-center gap-8 px-6">
           <ul className="flex flex-col items-center gap-6">
@@ -165,7 +168,7 @@ export function Navbar() {
             </Link>
             <a
               href="tel:+201123311000"
-              className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-base font-semibold text-gold-200"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-base font-semibold text-gold-500 dark:text-gold-200"
             >
               <Phone className="h-4 w-4" />
               +20 112 331 1000

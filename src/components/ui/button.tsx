@@ -15,7 +15,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       primary:
         'bg-gold-gradient text-ink-900 shadow-gold hover:shadow-gold-lg hover:scale-[1.03] active:scale-[0.98]',
       outline:
-        'border border-gold-400/40 text-gold-200 hover:bg-gold-400/5 hover:border-gold-400/70',
+        'border border-gold-400/40 text-gold-600 dark:text-gold-200 hover:bg-gold-400/5 hover:border-gold-400/70',
       ghost: 'text-foreground/80 hover:text-foreground',
     };
     const sizes: Record<string, string> = {

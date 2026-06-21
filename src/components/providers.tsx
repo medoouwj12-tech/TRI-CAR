@@ -19,8 +19,8 @@ export function Providers({
       <NextThemesProvider
         attribute="class"
         defaultTheme="light"
-        forcedTheme="light"
-        disableTransitionOnChange={false}
+        enableSystem={false}
+        disableTransitionOnChange
       >
         {children}
         <Toaster

@@ -83,17 +83,17 @@ export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
         <div className="space-y-2 my-4 text-xs">
           <div className="flex justify-between border-b border-gold-400/5 pb-1.5">
             <span className="text-foreground/60">إيجار يومي:</span>
-            <span className="font-extrabold text-gold-200">{formatCurrency(car.pricePerDay, locale)}</span>
+            <span className="font-extrabold text-gold-600 dark:text-gold-200">{formatCurrency(car.pricePerDay, locale)}</span>
           </div>
           <div className="flex justify-between border-b border-gold-400/5 pb-1.5">
             <span className="text-foreground/60">إيجار أسبوعي:</span>
-            <span className="font-extrabold text-gold-200">
+            <span className="font-extrabold text-gold-600 dark:text-gold-200">
               {car.pricePerWeek > 0 ? formatCurrency(car.pricePerWeek, locale) : '—'}
             </span>
           </div>
           <div className="flex justify-between pb-1">
             <span className="text-foreground/60">إيجار شهري:</span>
-            <span className="font-extrabold text-gold-200">
+            <span className="font-extrabold text-gold-600 dark:text-gold-200">
               {car.pricePerMonth > 0 ? formatCurrency(car.pricePerMonth, locale) : '—'}
             </span>
           </div>

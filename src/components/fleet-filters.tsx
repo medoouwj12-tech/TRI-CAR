@@ -67,7 +67,7 @@ export function FleetFilters({
                 'rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-300',
                 category === c
                   ? 'bg-gold-gradient text-ink-900 shadow-gold-sm'
-                  : 'border border-gold-400/20 text-foreground/70 hover:border-gold-400/50 hover:text-gold-200',
+                  : 'border border-gold-400/20 text-foreground/70 hover:border-gold-400/50 hover:text-gold-600 dark:hover:text-gold-200',
               )}
             >
               {c === 'ALL' ? t('filters.all') : t(`categories.${c}`)}

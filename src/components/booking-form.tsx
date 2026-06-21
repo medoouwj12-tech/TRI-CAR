@@ -222,7 +222,7 @@ export function BookingForm({ car }: { car: Car }) {
                     value={data.date}
                     onChange={(e) => set('date', e.target.value)}
                     type="date"
-                    className="w-full bg-transparent text-sm focus:outline-none [color-scheme:dark]"
+                    className="w-full bg-transparent text-sm focus:outline-none [color-scheme:light] dark:[color-scheme:dark]"
                   />
                 </Field>
                 <Field icon={Calendar} label={t('fields.time')}>
@@ -230,7 +230,7 @@ export function BookingForm({ car }: { car: Car }) {
                     value={data.time}
                     onChange={(e) => set('time', e.target.value)}
                     type="time"
-                    className="w-full bg-transparent text-sm focus:outline-none [color-scheme:dark]"
+                    className="w-full bg-transparent text-sm focus:outline-none [color-scheme:light] dark:[color-scheme:dark]"
                   />
                 </Field>
               </div>
@@ -260,7 +260,7 @@ export function BookingForm({ car }: { car: Car }) {
                 <p className="leading-relaxed text-foreground/70">
                   {t('review.paymentDesc')}
                 </p>
-                <div className="flex items-center gap-3 mt-2 font-mono text-base font-extrabold text-gold-200 bg-background/50 px-3.5 py-2.5 rounded-xl border border-gold-400/15 justify-between">
+                <div className="flex items-center gap-3 mt-2 font-mono text-base font-extrabold text-gold-600 dark:text-gold-200 bg-background/50 px-3.5 py-2.5 rounded-xl border border-gold-400/15 justify-between">
                   <span dir="ltr">01123311000</span>
                   <span className="text-[10px] bg-gold-400/20 px-2 py-1 rounded-md text-gold-300 font-sans font-semibold shrink-0">
                     {t('review.paymentMethods')}
@@ -277,7 +277,7 @@ export function BookingForm({ car }: { car: Car }) {
         {step > 0 && (
           <button
             onClick={() => setStep((s) => (s - 1) as Step)}
-            className="flex-1 rounded-full border border-gold-400/30 px-4 py-2.5 text-xs font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
+            className="flex-1 rounded-full border border-gold-400/30 px-4 py-2.5 text-xs font-semibold text-gold-600 dark:text-gold-200 hover:bg-gold-400/5 transition-all"
           >
             {t('back')}
           </button>

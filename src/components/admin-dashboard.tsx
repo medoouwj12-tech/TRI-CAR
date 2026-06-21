@@ -68,7 +68,7 @@ export function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-ink-900 flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-background text-foreground flex flex-col lg:flex-row">
       {/* Sidebar */}
       <aside className="lg:w-64 lg:fixed lg:inset-y-0 lg:right-0 border-l border-gold-400/15 bg-card/60 backdrop-blur-xl p-5 flex flex-col">
         <div className="mb-8">
@@ -87,7 +87,7 @@ export function AdminDashboard() {
         </nav>
         <button
           onClick={logout}
-          className="mt-4 inline-flex items-center gap-2 rounded-xl border border-gold-400/20 px-3 py-2 text-xs text-foreground/70 hover:border-gold-400/50 hover:text-gold-200"
+          className="mt-4 inline-flex items-center gap-2 rounded-xl border border-gold-400/20 px-3 py-2 text-xs text-foreground/70 hover:border-gold-400/50 hover:text-gold-600 dark:hover:text-gold-200"
         >
           <LogOut className="h-3.5 w-3.5" />
           {t('logout')}
@@ -159,7 +159,7 @@ function SideItem({
         'w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all',
         active
           ? 'bg-gold-gradient text-ink-900 shadow-gold-sm'
-          : 'text-foreground/70 hover:bg-gold-400/5 hover:text-gold-200',
+          : 'text-foreground/70 hover:bg-gold-400/5 hover:text-gold-600 dark:hover:text-gold-200',
       )}
     >
       <Icon className="h-4 w-4" />
@@ -326,7 +326,7 @@ function CarsView({
                     className={cn(
                       'inline-flex items-center gap-0.5 text-[9px] font-bold px-2 py-0.5 rounded-full border transition-all',
                       c.featured
-                        ? 'border-gold-400/40 text-gold-200 bg-gold-400/10 hover:border-gold-400/70 hover:bg-gold-400/20'
+                        ? 'border-gold-400/40 text-gold-600 dark:text-gold-200 bg-gold-400/10 hover:border-gold-400/70 hover:bg-gold-400/20'
                         : 'border-foreground/20 text-foreground/40 hover:border-foreground/40 hover:bg-foreground/5',
                     )}
                   >
@@ -370,7 +370,7 @@ function IconBtn({
         'inline-flex h-8 w-8 items-center justify-center rounded-lg border transition-all',
         danger
           ? 'border-red-500/30 text-red-300 hover:bg-red-500/10'
-          : 'border-gold-400/20 text-foreground/70 hover:border-gold-400/60 hover:text-gold-200',
+          : 'border-gold-400/20 text-foreground/70 hover:border-gold-400/60 hover:text-gold-600 dark:hover:text-gold-200',
       )}
     >
       {children}
@@ -463,7 +463,7 @@ function BookingsView({
                   <div className="flex items-center gap-3 mt-3">
                     <a
                       href={`tel:${b.phone}`}
-                      className="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-200"
+                      className="inline-flex items-center gap-1.5 text-xs text-gold-500 dark:text-gold-400 hover:text-gold-600 dark:hover:text-gold-200"
                     >
                       <Phone className="h-3 w-3" />
                       {b.phone}
@@ -486,7 +486,7 @@ function BookingsView({
                     <select
                       value={b.status}
                       onChange={(e) => handleStatusChange(b.id, e.target.value)}
-                      className="bg-ink-900 border border-gold-400/20 text-xs text-foreground/80 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-gold-400/60"
+                      className="bg-background border border-gold-400/20 text-xs text-foreground/80 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-gold-400/60"
                     >
                       <option value="PENDING">Pending</option>
                       <option value="CONTACTED">Contacted</option>
@@ -517,7 +517,7 @@ function StatusPill({ status }: { status: string }) {
   const map: Record<string, { icon: any; cls: string }> = {
     PENDING: { icon: Clock, cls: 'border-yellow-500/30 text-yellow-300 bg-yellow-500/5' },
     CONFIRMED: { icon: CheckCircle2, cls: 'border-emerald-500/30 text-emerald-300 bg-emerald-500/5' },
-    COMPLETED: { icon: CheckCircle2, cls: 'border-gold-400/30 text-gold-200 bg-gold-400/5' },
+    COMPLETED: { icon: CheckCircle2, cls: 'border-gold-400/30 text-gold-600 dark:text-gold-200 bg-gold-400/5' },
     CANCELLED: { icon: XCircle, cls: 'border-red-500/30 text-red-300 bg-red-500/5' },
     CONTACTED: { icon: Phone, cls: 'border-blue-500/30 text-blue-300 bg-blue-500/5' },
   };
@@ -813,7 +813,7 @@ function CarFormModal({
         <div className="mt-6 flex justify-end gap-2 border-t border-gold-400/10 pt-4">
           <button
             onClick={onClose}
-            className="rounded-full border border-gold-400/30 px-5 py-2 text-sm font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
+            className="rounded-full border border-gold-400/30 px-5 py-2 text-sm font-semibold text-gold-600 dark:text-gold-200 hover:bg-gold-400/5 transition-all"
           >
             إلغاء
           </button>

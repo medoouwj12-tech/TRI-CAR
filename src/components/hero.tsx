@@ -49,9 +49,9 @@ export function Hero() {
             backgroundImage: "url('/images/hero-banner.png')",
           }}
         />
-        {/* Light white overlay for premium look & text readability on light mode */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40 rtl:bg-gradient-to-l" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/50" />
+        {/* Theme-aware overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40 rtl:bg-gradient-to-l dark:from-ink-900/95 dark:via-ink-900/78 dark:to-ink-900/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/50 dark:from-ink-900/20 dark:to-ink-900/70" />
         {/* Radial gold glow */}
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60rem] w-[60rem] rounded-full opacity-25"
@@ -94,7 +94,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-background/40 px-4 py-1.5 text-xs sm:text-sm backdrop-blur-md"
             >
               <Sparkles className="h-3.5 w-3.5 text-gold-300" />
-              <span className="text-gold-100/90">{t('badge')}</span>
+              <span className="text-gold-700 dark:text-gold-100/90">{t('badge')}</span>
             </motion.div>
 
             <motion.h1
@@ -141,7 +141,7 @@ export function Hero() {
               </Link>
               <Link
                 href="/fleet"
-                className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
+                className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-gold-600 dark:text-gold-200 hover:bg-gold-400/5 transition-all"
               >
                 {tFleet('viewAll')}
               </Link>
@@ -262,7 +262,7 @@ function SearchForm() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full bg-transparent text-sm text-foreground/90 focus:outline-none [color-scheme:light]"
+            className="w-full bg-transparent text-sm text-foreground/90 focus:outline-none [color-scheme:light] dark:[color-scheme:dark]"
           />
         </Field>
         <button

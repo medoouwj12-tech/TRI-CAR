@@ -37,7 +37,7 @@ export async function FleetTeaser({ locale }: { locale: string }) {
       <div className="mt-12 text-center">
         <Link
           href="/fleet"
-          className="group inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-7 py-3.5 text-sm font-semibold text-gold-200 hover:bg-gold-400/5 transition-all"
+          className="group inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-7 py-3.5 text-sm font-semibold text-gold-600 dark:text-gold-200 hover:bg-gold-400/5 transition-all"
         >
           {t('viewAll')}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />

@@ -132,6 +132,9 @@
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
   }
+  .dark .glass-light {
+    background: rgba(10, 10, 10, 0.58);
+  }
   .grain {
     position: relative;
   }
